@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="VarelaRound-Regular.otf">
+            <string>VarelaRound</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="ACVerifiedCodeAlertID" id="71i-5B-SHA" customClass="ACVerifiedCodeAlert" customModule="AtendeeCentral" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TUO-V9-ubg">
+                    <rect key="frame" x="15" y="215" width="570" height="170"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;This is a verified code, info import in process&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0u-qV-tAJ" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
+                            <rect key="frame" x="19" y="80" width="533" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="5Qo-0M-1sZ">
+                            <rect key="frame" x="267" y="11" width="37" height="37"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="37" id="ec1-FT-mA3"/>
+                                <constraint firstAttribute="width" constant="37" id="kZz-rk-y6g"/>
+                            </constraints>
+                            <color key="color" red="0.062745098040000002" green="0.074509803920000006" blue="0.074509803920000006" alpha="1" colorSpace="calibratedRGB"/>
+                        </activityIndicatorView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k6V-mo-1XB" customClass="ACCustomButton" customModule="AtendeeCentral" customModuleProvider="target">
+                            <rect key="frame" x="210" y="121" width="150" height="30"/>
+                            <color key="backgroundColor" red="0.97254901959999995" green="0.85882352939999995" blue="0.074509803920000006" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="KnC-xi-NyK"/>
+                                <constraint firstAttribute="width" constant="150" id="NYT-S2-OJl"/>
+                            </constraints>
+                            <state key="normal" title="OK">
+                                <color key="titleColor" red="0.1058823529" green="0.1058823529" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="okButtonAction:" destination="71i-5B-SHA" eventType="touchUpInside" id="hIL-yE-n89"/>
+                            </connections>
+                        </button>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALERT!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4o5-NT-m9d">
+                            <rect key="frame" x="232" y="55" width="107" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="E8g-7c-cmZ"/>
+                                <constraint firstAttribute="width" constant="107" id="fjy-E5-h58"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="VarelaRound" family="Varela Round" pointSize="18"/>
+                            <color key="textColor" red="0.78477909479999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="4o5-NT-m9d" firstAttribute="top" secondItem="5Qo-0M-1sZ" secondAttribute="bottom" constant="7" id="0Ta-j8-jyq"/>
+                        <constraint firstItem="5Qo-0M-1sZ" firstAttribute="top" secondItem="TUO-V9-ubg" secondAttribute="top" constant="11" id="1fA-4E-4p5"/>
+                        <constraint firstItem="4o5-NT-m9d" firstAttribute="centerX" secondItem="TUO-V9-ubg" secondAttribute="centerX" id="78D-F3-LMt"/>
+                        <constraint firstItem="k6V-mo-1XB" firstAttribute="centerX" secondItem="TUO-V9-ubg" secondAttribute="centerX" id="G9s-Rq-Ipw"/>
+                        <constraint firstAttribute="height" constant="170" id="JxA-Y4-XCD"/>
+                        <constraint firstItem="k6V-mo-1XB" firstAttribute="top" secondItem="P0u-qV-tAJ" secondAttribute="bottom" constant="20" id="R6x-Cc-Wn6"/>
+                        <constraint firstAttribute="trailing" secondItem="P0u-qV-tAJ" secondAttribute="trailing" constant="18" id="bO5-gU-VVp"/>
+                        <constraint firstItem="5Qo-0M-1sZ" firstAttribute="centerX" secondItem="TUO-V9-ubg" secondAttribute="centerX" id="eFv-AO-NnO"/>
+                        <constraint firstItem="P0u-qV-tAJ" firstAttribute="leading" secondItem="TUO-V9-ubg" secondAttribute="leading" constant="19" id="rgu-dN-s1V"/>
+                        <constraint firstAttribute="bottom" secondItem="k6V-mo-1XB" secondAttribute="bottom" constant="19" id="seO-P7-8AA"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.40101396280000001" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="TUO-V9-ubg" secondAttribute="trailing" constant="15" id="NaE-zh-Cm2"/>
+                <constraint firstItem="TUO-V9-ubg" firstAttribute="centerY" secondItem="71i-5B-SHA" secondAttribute="centerY" id="qxV-aZ-VEU"/>
+                <constraint firstItem="TUO-V9-ubg" firstAttribute="leading" secondItem="71i-5B-SHA" secondAttribute="leading" constant="15" id="y2m-jC-hOi"/>
+            </constraints>
+            <connections>
+                <outlet property="alertLabel" destination="P0u-qV-tAJ" id="PSi-aY-UjH"/>
+                <outlet property="bgView" destination="TUO-V9-ubg" id="CKf-ps-rcr"/>
+                <outlet property="showAlertlabel" destination="4o5-NT-m9d" id="Y21-jr-PAR"/>
+            </connections>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,22 @@
+PODS:
+  - Alamofire (3.4.1)
+  - AlamofireOauth2 (1.2.1):
+    - Alamofire
+    - KeychainAccess
+  - KeychainAccess (2.3.6)
+  - QRCodeReader.swift (6.0.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 3.4)
+  - AlamofireOauth2 (~> 1.0)
+  - QRCodeReader.swift
+
+SPEC CHECKSUMS:
+  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  AlamofireOauth2: 88546b39472af7ef7e8bccd7d0367db607462eef
+  KeychainAccess: 7f10e2ef998ddf954a64d5d608be08677774684d
+  QRCodeReader.swift: 4aa8b0f88847a51312d6ffd2cafc387962da9dd8
+
+PODFILE CHECKSUM: 6805c64bae77694778770f1caa94c5f3500c3c76
+
+COCOAPODS: 1.0.0
