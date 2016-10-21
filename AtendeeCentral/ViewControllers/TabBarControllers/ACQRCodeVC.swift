@@ -35,7 +35,7 @@ class ACQRCodeVC: UIViewController,QRCodeReaderViewControllerDelegate {
     func customInit() {
         let titleLabel = UILabel(frame:CGRectMake(0,0,UIScreen.mainScreen().bounds.size.width,44))
         titleLabel.textAlignment = NSTextAlignment.Center
-        titleLabel.textColor = UIColor.whiteColor()
+        titleLabel.textColor = UIColor.blackColor()
         titleLabel.attributedText = getAttributedText("Scan a AttendeeQRTM and Follow", position: 13)
         self.navigationController?.navigationBar.topItem?.titleView = titleLabel
         

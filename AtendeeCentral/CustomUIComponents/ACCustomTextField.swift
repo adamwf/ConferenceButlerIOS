@@ -14,7 +14,7 @@ class ACCustomTextField: UITextField {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 //        self.keyboardType = UIKeyboardType.ASCIICapable
-        self.font = KAppRegularFont
+        self.font = UIFont(name:"VarelaRound", size:16)
         self.autocorrectionType = UITextAutocorrectionType.No
         //        self.autocapitalizationType = UITextAutocapitalizationType.None
         let padView =  UIView(frame: CGRectMake(0, 0, 10, self.frame.size.height))
@@ -24,13 +24,13 @@ class ACCustomTextField: UITextField {
         self.tintColor = KAppTintColor
         self.attributedPlaceholder = NSAttributedString(string: self.placeholder!, attributes: [NSForegroundColorAttributeName : KAppPlaceholderColor])
         self.textColor = UIColor.darkTextColor()
-        NSNotificationCenter.defaultCenter().addObserverForName(
-            "size",
-            object: nil, queue: nil,
-            usingBlock:{
-                [weak self] note in
-                self?.methodOFReceivedNotication(note)
-            })
+//        NSNotificationCenter.defaultCenter().addObserverForName(
+//            "size",
+//            object: nil, queue: nil,
+//            usingBlock:{
+//                [weak self] note in
+//                self?.methodOFReceivedNotication(note)
+//            })
         
     }
     
@@ -51,8 +51,8 @@ class ACCustomTextField: UITextField {
         //        self.keyboardType = UIKeyboardType.ASCIICapable
         self.autocorrectionType = UITextAutocorrectionType.No
         //        self.autocapitalizationType = UITextAutocapitalizationType.None
-        self.attributedPlaceholder = NSAttributedString(string: self.placeholder!, attributes: [NSForegroundColorAttributeName : KAppPlaceholderColor ,NSFontAttributeName : KAppRegularFont])
-        self.font = KAppRegularFont
+        self.attributedPlaceholder = NSAttributedString(string: self.placeholder!, attributes: [NSForegroundColorAttributeName : KAppPlaceholderColor ,NSFontAttributeName : UIFont(name:"VarelaRound", size:16)!])
+        self.font = UIFont(name:"VarelaRound", size:16)
         self.textColor = UIColor.darkTextColor()
     }
 

@@ -55,7 +55,7 @@ class ACContactVC: UIViewController {
         let padView =  UIView(frame: CGRectMake(0, 0, 10, searchTextField.frame.size.height))
         searchTextField.leftView = padView;
         searchTextField.leftViewMode = UITextFieldViewMode.Always
-        searchTextField.attributedPlaceholder = NSAttributedString(string: searchTextField.placeholder!, attributes: [NSForegroundColorAttributeName : UIColor.lightGrayColor() ,NSFontAttributeName : KAppRegularFont])
+        searchTextField.attributedPlaceholder = NSAttributedString(string: searchTextField.placeholder!, attributes: [NSForegroundColorAttributeName : UIColor.lightGrayColor() ,NSFontAttributeName : UIFont(name:"VarelaRound", size:16)!])
         gabTblView.estimatedRowHeight = 100
         gabTblView.rowHeight = UITableViewAutomaticDimension
         sortButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)

@@ -11,6 +11,45 @@ import TwitterKit
 import AlamofireOauth2
 import Alamofire
 
+let instagramOauth2Settings = Oauth2Settings(
+    baseURL: "https://api.instagram.com/v1/users/self",
+    authorizeURL: "https://api.instagram.com/oauth/authorize",
+    tokenURL: "https://api.instagram.com/oauth/access_token",
+    redirectURL: "http://172.16.6.55:4000/sa/complete/instagram-oauth2/",
+    clientID: "8cf147a30e8c42e5a25a5f04081cf9a9",
+    clientSecret: "740870182da64beda2e8c036723f2561",
+    scope: "basic"
+)
+
+// Minimal Alamofire implementation. For more info see https://github.com/Alamofire/Alamofire#crud--authorization
+public enum InstagramRequestConvertible: URLRequestConvertible {
+    
+    static var baseURLString: String? = instagramOauth2Settings.baseURL
+    static var OAuthToken: String?
+    
+    case Me()
+    
+    public var URLRequest: NSMutableURLRequest  {
+        
+        var urlString = ""
+        if let token = InstagramRequestConvertible.OAuthToken {
+            urlString = String(format: "%@/?access_token=%@",InstagramRequestConvertible.baseURLString!,token)
+            
+//            mutableURLRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+//            mutableURLRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+        
+        let url = NSURL(string: urlString)!
+        let mutableURLRequest = NSMutableURLRequest(URL: url)
+        mutableURLRequest.HTTPMethod = "GET"
+        
+        print("urlString>>>>",   urlString)
+        
+        return mutableURLRequest
+    }
+}
+
+
 enum alertValidation: Int {
     case alert_Empty = 0
     case alert_FirstNameInvalid
@@ -453,9 +492,38 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
             break
         case 3:
 //            userObj.isInstagram = !userObj.isInstagram
-            if userObj.isInstagram == true {
+            if userObj.isInstagram == false {
+                print(instagramOauth2Settings)
+                self.view.endEditing(true)
+                UsingOauth2(instagramOauth2Settings, performWithToken: { (token) in
+                    InstagramRequestConvertible.OAuthToken = token
+                    print(InstagramRequestConvertible.Me())
+                    
+                    Alamofire.request(InstagramRequestConvertible.Me()).response(completionHandler: {(request, response, json, error) in
+                        //                self.result.text = "\(json)"
+                        print("JSON = \(json)")
+                        do {
+                            let result = try NSJSONSerialization.JSONObjectWithData(json!, options: NSJSONReadingOptions.MutableContainers)
+                            logInfo("\n\n controller  >>>>>>\n\(self)")
+                            print(result)
+                            self.addSocialLogin = socialLogin.instagram
+                            self.callApiForSocialLogIn(result as AnyObject as! NSDictionary, provider: "instagram")
+                            logInfo("\n\n Response >>>>>> \n\(result)")
+                            
+                        } catch {
+                            logInfo("\n\n error  >>>>>>\n\(error)")
+                        }
+                        //                let result = JSON(data: json!)
+                        //                print(result)
+                    })
+                }) {
+                    print("Oauth2 failed")
+                }
                 
+            } else {
+                callApiForSocialLogIn([:], provider: "linkedin")
             }
+
             break
         default:
 //            userObj.isTwitter = !userObj.isTwitter
@@ -659,6 +727,9 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
                 dict[ACSocialUID] =  info.objectForKeyNotNull("userID", expected: "")  as! String
                 break
             case socialLogin.instagram :
+                dict[ACSocialLoginStatus] = !userObj.isInstagram
+                dict[ACUserName] =  (info.objectForKeyNotNull("data", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("full_name", expected: "") as! String
+                dict[ACSocialUID] = (info.objectForKeyNotNull("data", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("id", expected: "") as! String
                 break
             default:
                 dict[ACSocialLoginStatus] = !userObj.isTwitter
@@ -681,19 +752,20 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
                     if res.objectForKeyNotNull("responseCode", expected: 0) as! NSInteger == 200 {
                         switch self.addSocialLogin {
                         case socialLogin.linkedIn:
-                            self.userObj.islinkedIn = (res.objectForKeyNotNull("social_profile", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("login_status", expected: 0) as! Bool
+                            self.userObj.islinkedIn = (res.objectForKeyNotNull("social_login", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("login_status", expected: 0) as! Bool
 
                             break
                         case socialLogin.facebook :
-                            self.userObj.isFacebook = (res.objectForKeyNotNull("social_profile", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("login_status", expected: 0) as! Bool
+                            self.userObj.isFacebook = (res.objectForKeyNotNull("social_login", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("login_status", expected: 0) as! Bool
                             break
                         case socialLogin.google :
-                            self.userObj.isGoogle = (res.objectForKeyNotNull("social_profile", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("login_status", expected: 0) as! Bool
+                            self.userObj.isGoogle = (res.objectForKeyNotNull("social_login", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("login_status", expected: 0) as! Bool
                             break
                         case socialLogin.instagram :
+                            self.userObj.isInstagram = (res.objectForKeyNotNull("social_login", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("login_status", expected: 0) as! Bool
                             break
                         default:
-                            self.userObj.isTwitter = (res.objectForKeyNotNull("social_profile", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("login_status", expected: 0) as! Bool
+                            self.userObj.isTwitter = (res.objectForKeyNotNull("social_login", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("login_status", expected: 0) as! Bool
 
                             break
                         }

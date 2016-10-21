@@ -124,10 +124,9 @@ class ACFontChangeVC: UIViewController {
         AlertController.alert("", message: "Font has been updated successfully.", buttons: ["OK"], tapBlock: { (alertAction, position) -> Void in
             if position == 0 {
                 NSNotificationCenter.defaultCenter().postNotificationName("size", object: nil, userInfo:["size": (NSUserDefaults.standardUserDefaults().valueForKey("size")?.stringValue)!])
+//                self.navigationController?.popViewControllerAnimated(true)
                 
             }
         })
     }
-
-
 }

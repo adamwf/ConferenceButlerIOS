@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -7,7 +7,6 @@
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
             <string>HelveticaNeue</string>
             <string>HelveticaNeue</string>
         </mutableArray>
@@ -36,6 +35,7 @@
             <string>Raleway-Regular</string>
         </mutableArray>
         <mutableArray key="VarelaRound-Regular.otf">
+            <string>VarelaRound</string>
             <string>VarelaRound</string>
             <string>VarelaRound</string>
             <string>VarelaRound</string>
@@ -628,7 +628,7 @@
                                                         <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MiR-mt-sod">
                                                             <rect key="frame" x="0.0" y="0.0" width="600" height="159"/>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9CD-7h-Lkc">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9CD-7h-Lkc" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                                             <rect key="frame" x="15" y="165" width="570" height="0.0"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" id="KzP-GY-ymx"/>
@@ -769,7 +769,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HzA-NZ-v46">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HzA-NZ-v46" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                             <rect key="frame" x="15" y="231" width="248" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="r3C-28-AUn"/>
@@ -788,7 +788,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z17-TK-86E">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z17-TK-86E" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                             <rect key="frame" x="15" y="265" width="248" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="Q4u-U3-dn0"/>
@@ -797,7 +797,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4R5-sL-MhK">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4R5-sL-MhK" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                             <rect key="frame" x="310" y="265" width="275" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -813,7 +813,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="99z-xQ-CAi">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="99z-xQ-CAi" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                             <rect key="frame" x="310" y="231" width="275" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -862,7 +862,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLb-bv-ySK">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLb-bv-ySK" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="33" width="570" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1200,13 +1200,13 @@
                                                         <color key="titleColor" red="0.2901960784" green="0.28627450980000002" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jjI-8M-7Y9">
-                                                    <rect key="frame" x="310" y="46" width="275" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24/24/1111" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jjI-8M-7Y9" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
+                                                    <rect key="frame" x="311" y="46" width="279" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="13e-ZY-Avj"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="VarelaRound" family="Varela Round" pointSize="14"/>
+                                                    <color key="textColor" red="0.37254901959999998" green="0.35686274509999999" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1214,7 +1214,6 @@
                                                 <constraint firstItem="8hD-hH-Ss1" firstAttribute="leading" secondItem="yoa-IX-tZv" secondAttribute="leading" id="2C8-tG-SsG"/>
                                                 <constraint firstItem="jjI-8M-7Y9" firstAttribute="top" secondItem="utK-Ob-nwo" secondAttribute="bottom" constant="12" id="4fe-3n-uxY"/>
                                                 <constraint firstAttribute="trailing" secondItem="8hD-hH-Ss1" secondAttribute="trailing" id="6fx-ZJ-yhM"/>
-                                                <constraint firstItem="jjI-8M-7Y9" firstAttribute="leading" secondItem="Wfu-k3-ycY" secondAttribute="trailing" constant="7" id="FTz-nd-IAh"/>
                                                 <constraint firstAttribute="bottom" secondItem="8hD-hH-Ss1" secondAttribute="bottom" id="HUL-5J-9Mu"/>
                                                 <constraint firstItem="Wfu-k3-ycY" firstAttribute="leading" secondItem="ubh-gT-xRl" secondAttribute="trailing" constant="19" id="ImJ-Kd-QJ2"/>
                                                 <constraint firstItem="ubh-gT-xRl" firstAttribute="top" secondItem="utK-Ob-nwo" secondAttribute="bottom" constant="8" id="Tdu-9C-2nc"/>
@@ -1223,9 +1222,10 @@
                                                 <constraint firstItem="G3G-8o-vEy" firstAttribute="top" secondItem="yoa-IX-tZv" secondAttribute="top" constant="8" id="ajM-sO-WqN"/>
                                                 <constraint firstItem="G3G-8o-vEy" firstAttribute="leading" secondItem="yoa-IX-tZv" secondAttribute="leading" constant="10" id="b6b-qB-jPx"/>
                                                 <constraint firstItem="utK-Ob-nwo" firstAttribute="leading" secondItem="G3G-8o-vEy" secondAttribute="trailing" constant="18" id="f60-3k-JBd"/>
+                                                <constraint firstItem="jjI-8M-7Y9" firstAttribute="leading" secondItem="Wfu-k3-ycY" secondAttribute="trailing" constant="8" id="fk6-rL-gpd"/>
                                                 <constraint firstItem="Wfu-k3-ycY" firstAttribute="top" secondItem="utK-Ob-nwo" secondAttribute="bottom" constant="8" id="sqi-5n-HeK"/>
                                                 <constraint firstItem="ubh-gT-xRl" firstAttribute="leading" secondItem="G3G-8o-vEy" secondAttribute="trailing" constant="14" id="ySy-Tz-pRM"/>
-                                                <constraint firstAttribute="trailing" secondItem="jjI-8M-7Y9" secondAttribute="trailing" constant="15" id="z9V-cI-lie"/>
+                                                <constraint firstAttribute="trailing" secondItem="jjI-8M-7Y9" secondAttribute="trailing" constant="10" id="z9V-cI-lie"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -1461,7 +1461,7 @@
                                                         <constraint firstAttribute="height" constant="65" id="hFK-1u-iYe"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOb-ck-OR9">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOb-ck-OR9" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                                     <rect key="frame" x="100" y="15" width="480" height="21"/>
                                                     <fontDescription key="fontDescription" name="VarelaRound" family="Varela Round" pointSize="18"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -1474,7 +1474,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="7E3-r9-Wm7"/>
                                                         <constraint firstAttribute="width" constant="101" id="gfL-Jd-AvF"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="VarelaRound" family="Varela Round" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="VarelaRound" family="Varela Round" pointSize="12"/>
                                                     <state key="normal" title="View Profile">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -1661,7 +1661,7 @@
                                                         <constraint firstAttribute="height" constant="60" id="RCe-xT-oUg"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbo-ZV-ANg">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbo-ZV-ANg" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                                     <rect key="frame" x="91" y="29" width="487" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="0fb-H9-Urk"/>
@@ -1893,7 +1893,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Jca-LP-jKk">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Jca-LP-jKk" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                                     <rect key="frame" x="60" y="15" width="515" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="DLb-Ya-mDT"/>
@@ -2987,7 +2987,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="62R-t1-P98">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="62R-t1-P98" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                                     <rect key="frame" x="88" y="25" width="504" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="36e-SU-DZe"/>
@@ -3467,7 +3467,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="156"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hbgsdsgdvvydv" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTn-TY-04t">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hbgsdsgdvvydv" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTn-TY-04t" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                             <rect key="frame" x="114" y="32" width="390" height="23"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="23" id="9zZ-wM-ll7"/>
@@ -3485,7 +3485,7 @@
                                             <color key="textColor" red="0.51764705879999995" green="0.51764705879999995" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hbgsdsgdvvydvsysghdsuhfvduhfvhdfdhfhhbghubh" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nse-lv-eqi">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hbgsdsgdvvydvsysghdsuhfvduhfvhdfdhfhhbghubh" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nse-lv-eqi" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                             <rect key="frame" x="114" y="59" width="397" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="ZgI-Tx-yQq"/>
@@ -3494,7 +3494,7 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="dfefewefgtrwge" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbG-FB-GYS">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="dfefewefgtrwge" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbG-FB-GYS" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                             <rect key="frame" x="114" y="99" width="402" height="49"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="dbL-RK-j7M"/>
@@ -3503,7 +3503,7 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hbgsdsgdvvydvsysghdsuhfvduhfvhdfdhfhhbghubh" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ix-Ma-r6Y">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hbgsdsgdvvydvsysghdsuhfvduhfvhdfdhfhhbghubh" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ix-Ma-r6Y" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                             <rect key="frame" x="114" y="79" width="400" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="UeO-GO-cQw"/>
@@ -3523,9 +3523,9 @@
                                             <state key="normal" title="Follow">
                                                 <color key="titleColor" red="0.074509803920000006" green="0.086274509799999996" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
+                                            <state key="selected" title="Unfollow"/>
                                             <connections>
                                                 <action selector="followButtonAction:" destination="kfN-f6-pSQ" eventType="touchUpInside" id="cLQ-xU-bm8"/>
-                                                <action selector="mapButtonAction:" destination="kfN-f6-pSQ" eventType="touchUpInside" id="RNw-Hl-wbA"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwt-5u-QUC">
@@ -3756,6 +3756,7 @@
                     <connections>
                         <outlet property="addressLabel" destination="zbG-FB-GYS" id="JJF-db-QNL"/>
                         <outlet property="emailIdLabel" destination="8Ix-Ma-r6Y" id="GpY-SN-4Ui"/>
+                        <outlet property="followButton" destination="iTL-Cp-Cca" id="n4N-sv-FaL"/>
                         <outlet property="gabScreenFooterView" destination="OpM-1F-Hh6" id="uND-vN-EBx"/>
                         <outlet property="gabScreenHeaderView" destination="Sfx-Tt-Yfb" id="QZE-DH-Wv9"/>
                         <outlet property="gabScreenTableView" destination="p8b-X4-SPf" id="O2Y-K0-Qne"/>
@@ -4546,7 +4547,7 @@
                                                         <constraint firstAttribute="height" constant="60" id="x1e-ce-48s"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hqr-rL-v4q">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hqr-rL-v4q" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                                     <rect key="frame" x="83" y="63" width="459" height="16"/>
                                                     <fontDescription key="fontDescription" name="VarelaRound" family="Varela Round" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -4563,7 +4564,7 @@
                                                     <color key="textColor" white="0.66666666669999997" alpha="0.30323275859999999" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXp-ab-wSb">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXp-ab-wSb" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                                     <rect key="frame" x="83" y="36" width="459" height="27"/>
                                                     <fontDescription key="fontDescription" name="VarelaRound" family="Varela Round" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -4580,7 +4581,7 @@
                                                     </state>
                                                     <state key="selected" image="chk"/>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2mn-5u-EDl">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2mn-5u-EDl" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                                     <rect key="frame" x="83" y="13" width="459" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="2IV-8p-jjd"/>
@@ -5675,7 +5676,7 @@
                                                         <constraint firstAttribute="height" constant="60" id="feO-XL-AbL"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UTA-q7-hxX">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UTA-q7-hxX" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                                     <rect key="frame" x="86" y="10" width="506" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="gqn-MK-fL8"/>
@@ -5684,7 +5685,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uey-Qc-dBM">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info, Handels" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uey-Qc-dBM" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                                     <rect key="frame" x="86" y="34" width="506" height="16"/>
                                                     <fontDescription key="fontDescription" name="VarelaRound" family="Varela Round" pointSize="13"/>
                                                     <color key="textColor" red="0.1058823529" green="0.1058823529" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
@@ -5716,7 +5717,7 @@
                                                     <color key="textColor" white="0.66666666669999997" alpha="0.49756205669999998" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fsy-3M-l7t">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fsy-3M-l7t" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                                     <rect key="frame" x="86" y="51" width="506" height="27"/>
                                                     <fontDescription key="fontDescription" name="VarelaRound" family="Varela Round" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -6212,7 +6213,7 @@
                                                         <constraint firstAttribute="height" constant="60" id="s20-op-wPC"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXz-Zs-bK8">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXz-Zs-bK8" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                                     <rect key="frame" x="79" y="33" width="497" height="27"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="dfsdfdfxvfadsfesfdsfdsfasfsfsdfsdfsfsdfsdfsdfsdf">
@@ -6235,7 +6236,7 @@
                                                     <color key="textColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wje-YR-gJF">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wje-YR-gJF" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                                     <rect key="frame" x="78" y="10" width="405" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="swl-Eg-lpk"/>
@@ -6427,7 +6428,7 @@
                                                         <constraint firstAttribute="width" constant="60" id="zLz-WP-tAb"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVP-z4-Lwk">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVP-z4-Lwk" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                                     <rect key="frame" x="83" y="63" width="441" height="16"/>
                                                     <fontDescription key="fontDescription" name="VarelaRound" family="Varela Round" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -6444,7 +6445,7 @@
                                                     <color key="textColor" white="0.66666666669999997" alpha="0.30323275859999999" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YmI-C9-2ii">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YmI-C9-2ii" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                                     <rect key="frame" x="83" y="36" width="441" height="27"/>
                                                     <fontDescription key="fontDescription" name="VarelaRound" family="Varela Round" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -6462,7 +6463,7 @@
                                                         <color key="titleColor" white="0.0" alpha="0.69827586210000003" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18q-Dt-oQG">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18q-Dt-oQG" customClass="ACCustomLabel" customModule="AtendeeCentral" customModuleProvider="target">
                                                     <rect key="frame" x="83" y="13" width="441" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="2D7-iO-irn"/>

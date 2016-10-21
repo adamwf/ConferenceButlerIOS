@@ -14,6 +14,7 @@ class ACGABUserProfileVC: UIViewController,UITableViewDelegate, UITableViewDataS
     var  userProfileArray = NSMutableArray()
     var socialLoginArray = NSMutableArray()
     
+    @IBOutlet weak var followButton: UIButton!
     var strQRCode : String = ""
     //header properties
     @IBOutlet var gabScreenHeaderView: UIView!
@@ -115,11 +116,8 @@ class ACGABUserProfileVC: UIViewController,UITableViewDelegate, UITableViewDataS
     } 
     
     //MARK:- UIButton Action Methods
-    @IBAction func mapButtonAction(sender: UIButton) {
-    }
-    
     @IBAction func followButtonAction(sender: UIButton) {
-           callApiForFollowUser()
+        callApiForFollowUser()
     }
     
     @IBAction func viewSocialCodeButtonAction(sender: UIButton) {
@@ -155,12 +153,21 @@ class ACGABUserProfileVC: UIViewController,UITableViewDelegate, UITableViewDataS
                     //Updated to work in Xcode 6.1
                     var error: Unmanaged<CFErrorRef>? = nil
                     //Updated to error to &error so the code builds in Xcode 6.1
-                    success = ABRecordSetValue(newContact, kABPersonFirstNameProperty, contact.userFName, &error)
-                    print("Setting first name was successful? \(success)")
-                    success = ABRecordSetValue(newContact, kABPersonLastNameProperty, self.userInfo.userLName, &error)
-                    print("Setting last name was successful? \(success)")
-                    success = ABRecordSetValue(newContact, kABPersonJobTitleProperty, "", &error)
-                    print("Setting job title was successful? \(success)")
+                    if (contact.userFName.length > 0) {
+                        success = ABRecordSetValue(newContact, kABPersonFirstNameProperty, contact.userFName, &error)
+                        print("Setting first name was successful? \(success)")
+                        success = ABRecordSetValue(newContact, kABPersonLastNameProperty, contact.userLName, &error)
+                        print("Setting last name was successful? \(success)")
+                        success = ABRecordSetValue(newContact, kABPersonJobTitleProperty, "Attendee", &error)
+                        print("Setting job title was successful? \(success)")
+                    } else {
+                        success = ABRecordSetValue(newContact, kABPersonFirstNameProperty, contact.userName, &error)
+                        print("Setting first name was successful? \(success)")
+                        print("Setting last name was successful? \(success)")
+                        success = ABRecordSetValue(newContact, kABPersonJobTitleProperty, "Attendee", &error)
+                        print("Setting job title was successful? \(success)")
+                    }
+                   
                     
                     if(contact.userPhone != "") {
                         let propertyType: NSNumber = kABMultiStringPropertyType
@@ -173,10 +180,13 @@ class ACGABUserProfileVC: UIViewController,UITableViewDelegate, UITableViewDataS
                         print("Setting phone number was successful? \(success)")
                         
                     }
-                    success = ABRecordSetValue(newContact, kABPersonNoteProperty, "added via wildcard - getwildcard.co", &error)
+                    success = ABRecordSetValue(newContact, kABPersonNoteProperty, "Added via AttendeeCentral - Confernce Butler", &error)
                     success = ABAddressBookAddRecord(adbk, newContact, &error)
                     print("Contact added successful? \(success)")
                     success = ABAddressBookSave(adbk, &error)
+                    if success == true {
+                        AlertController.alert("", message:"Contact added successfully to your contact.")
+                    }
                     print("Saving addressbook successful? \(success)")
                     
                 } else {
@@ -240,12 +250,14 @@ class ACGABUserProfileVC: UIViewController,UITableViewDelegate, UITableViewDataS
                     let res = response as! NSMutableDictionary
                     if res.objectForKeyNotNull("responseCode", expected: 0) as! NSInteger == 200 {
                         self.userInfo = ACUserInfo.getProfileInfo(res.objectForKeyNotNull("user", expected: NSDictionary())as! NSDictionary)
+                        self.strUserID = self.userInfo.userID
                         self.navigationItem.title = self.userInfo.userName
                         self.nameLabel.text = self.userInfo.userName
                         self.emailIdLabel.text = self.userInfo.userEmail
                         self.phoneNoLabel.text = self.userInfo.userPhone
                         self.addressLabel.text = self.userInfo.userAddress
                         self.userImageView.sd_setImageWithURL(NSURL(string: self.userInfo.userImage), placeholderImage: UIImage(named: "user"))
+                        self.followButton.setTitle(self.userInfo.isFriend == true ? "Unfollow" : "Follow", forState: .Normal)
                         self.gabScreenTableView.reloadData()
                     } else {
                         AlertController.alert(res.objectForKeyNotNull("responseMessage", expected: "") as! String)
@@ -278,7 +290,7 @@ class ACGABUserProfileVC: UIViewController,UITableViewDelegate, UITableViewDataS
                         self.phoneNoLabel.text = self.userInfo.userPhone
                         self.addressLabel.text = self.userInfo.userAddress
                         self.userImageView.sd_setImageWithURL(NSURL(string:self.userInfo.userImage), placeholderImage: UIImage(named: "user"))
-                        
+                        self.followButton.setTitle(self.userInfo.isFriend == true ? "Unfollow" : "Follow", forState: .Normal)
                         self.gabScreenTableView.reloadData()
                     } else {
                         AlertController.alert(res.objectForKeyNotNull("responseMessage", expected: "") as! String)

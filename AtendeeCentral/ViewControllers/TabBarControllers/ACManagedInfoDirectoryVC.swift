@@ -247,6 +247,7 @@ class ACManagedInfoDirectoryVC: UIViewController,UITableViewDataSource,UITableVi
             status[ACIsTwitter] = userInfo.isTwitter
             status[ACIsInstagram] = userInfo.isInstagram
             status[ACIsLinkedIn] = userInfo.islinkedIn
+            status[ACPrivacyType] = isFromDirectory ? "register_user" : "search_engine"
             let params: [String : AnyObject] = [
                 "user": dict ,
                 "status" : status

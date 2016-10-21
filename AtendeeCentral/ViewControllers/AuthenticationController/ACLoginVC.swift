@@ -14,19 +14,16 @@ import Alamofire
 let linkedInOauth2Settings = Oauth2Settings(
     baseURL: "https://api.linkedin.com/v1/people/~:(id,industry,firstName,lastName,emailAddress,headline,summary,publicProfileUrl,specialties,positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker)),pictureUrls::(original),location:(name))?format=json",
     authorizeURL: "https://www.linkedin.com/uas/oauth2/authorization",
-    tokenURL: "https://www.linkedin.com/uas/oauth/accessToken",
+    tokenURL: "https://www.linkedin.com/oauth/v2/accessToken",
     redirectURL: "https://172.16.6.55:4000/sa/complete/linkedin-oauth2/",
     clientID: "815x34ncds6r2m",
     clientSecret: "ONvZ69mcfoQ6DxSx",
     scope: "r_basicprofile,r_emailaddress"
 )
 
-//func Oauth2Settings(baseURL:) -> <#return type#> {
-//    <#function body#>
-//}
 // Minimal Alamofire implementation. For more info see https://github.com/Alamofire/Alamofire#crud--authorization
-
 public enum LinkedInRequestConvertible: URLRequestConvertible {
+    
     static var baseURLString: String? = linkedInOauth2Settings.baseURL
     static var OAuthToken: String?
     

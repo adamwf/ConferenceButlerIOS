@@ -11,7 +11,7 @@ import UIKit
 class ACInboxVC: UIViewController {
     
     var  messageListArray = NSMutableArray()
-    //message list properties
+
     @IBOutlet var messageListTableView: UITableView!
     @IBOutlet var messageListTextField: UITextField!
     var pageNo : NSInteger = 1
@@ -20,7 +20,6 @@ class ACInboxVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.customInit()
-        // Do any additional setup after loading the view.
     }
       
     override func viewWillAppear(animated: Bool) {
@@ -80,6 +79,7 @@ class ACInboxVC: UIViewController {
         dateFormatter.dateFormat = "MM/dd/yyyy"
         return dateFormatter.stringFromDate(date!)
     }
+    
     //MARK:- Tableview Datasource Methods
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messageListArray.count

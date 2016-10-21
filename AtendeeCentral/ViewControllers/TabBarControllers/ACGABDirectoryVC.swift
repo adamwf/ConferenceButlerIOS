@@ -9,37 +9,11 @@
 import UIKit
 
 class ACGABDirectoryVC: UIViewController {
-
-    let dict: NSMutableDictionary? = [
-        "userID" : "100",
-        "userName" : "Kris Stewart",
-        "userDetail" : "Fb Username",
-        "userEmail" : "abc@xyz.com",
-        "userImage" : "user1",
-        "userStatus" : 0
-    ]
-    
-    let dict1: NSMutableDictionary? = [
-        "userID" : "100",
-        "userName" : "Angela William",
-        "userDetail" : "Insta USername",
-        "userEmail" : "abc@xyz.com",
-        "userImage" : "user2",
-        "userStatus" : 0
-    ]
-    
-    let dict2: NSMutableDictionary? = [
-        "userID" : "100",
-        "userName" : "Angela William",
-        "userDetail" : "Insta USername",
-        "userEmail" : "abc@xyz.com",
-        "userImage" : "user2",
-        "userStatus" : 0
-    ]
-
     
     var  gabUserArray = NSMutableArray()
-
+    var pageNo : NSInteger = 1
+    var selectedArray = NSMutableArray()
+    
     @IBOutlet var selectAllButton: UIButton!
     @IBOutlet var gabDirectoryTableView: UITableView!
     
@@ -51,6 +25,9 @@ class ACGABDirectoryVC: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        gabUserArray.removeAllObjects()
+         pageNo = 1
+        callApiForGabDirectory(pageNo)
     }
 
     //MARK:- Memory management Methods
@@ -63,17 +40,6 @@ class ACGABDirectoryVC: UIViewController {
         self.navigationItem.title = "GAB Directory"
         self.navigationItem.leftBarButtonItem =  ACAppUtilities.leftBarButton("backArrow",controller: self)
         self.navigationItem.rightBarButtonItems = ACAppUtilities.rightBarButtonArray(["nav_ic13",],controller: self) as? [UIBarButtonItem]
-        self.getDummyData()
-    }
-
-    func getDummyData() {
-        
-        let tempArray : NSMutableArray = [dict!,dict1!,dict2!]
-        let response = NSMutableDictionary()
-        response.setValue(tempArray, forKey: "userArray")
-        
-        gabUserArray = ACFriendsInfo.getFriendList(response)
-        gabDirectoryTableView.reloadData()
     }
     
     // MARK: - Selector Methods
@@ -83,8 +49,15 @@ class ACGABDirectoryVC: UIViewController {
     }
     
     func rightBarButtonsAction(barbutton : UIButton) {
-        let groupChatVC = self.storyboard?.instantiateViewControllerWithIdentifier("ACGroupChatVCID") as! ACGroupChatVC
-        self.navigationController?.pushViewController(groupChatVC, animated: true)
+        print(selectedArray)
+        for case let item as ACFriendsInfo in selectedArray {
+            if item.isSelectedUserFriend {
+                let groupVC = self.storyboard?.instantiateViewControllerWithIdentifier("ACGroupVCID") as! ACGroupVC
+                groupVC.groupUsersArray = selectedArray
+                               self.navigationController?.pushViewController(groupVC, animated: true)
+                return
+            }
+        }
     }
 
     //MARK:- Tableview Datasource Methods
@@ -95,14 +68,12 @@ class ACGABDirectoryVC: UIViewController {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ACGABUserTVCellID", forIndexPath: indexPath) as! ACGABUserTVCell
         let friendsObj = gabUserArray [indexPath.row] as! ACFriendsInfo
-//        let obj = gabUserArray.objectAtIndex(indexPath.row)
-
         cell.nameLabel.text = friendsObj.userName
         cell.userImageView.image = UIImage(named: friendsObj.userImage)
         cell.userNameLabel.text = friendsObj.userName
         cell.userEmailIdLabel.text = friendsObj.userEmail
-        cell.messageButton.selected = friendsObj.userStatus
-
+        cell.messageButton.selected = friendsObj.isSelectedUserFriend
+        
         return cell
     }
     
@@ -112,19 +83,70 @@ class ACGABDirectoryVC: UIViewController {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.view.endEditing(true)
+        
+//        let friendsObj = gabUserArray.objectAtIndex(indexPath.row) as! ACFriendsInfo
+//        friendsObj.isSelectedUserFriend = !friendsObj.isSelectedUserFriend
+//        selectedArray.removeAllObjects()
+        
         let friendsObj = gabUserArray.objectAtIndex(indexPath.row) as! ACFriendsInfo
         selectAllButton.selected = false
-        friendsObj.userStatus = !friendsObj.userStatus
+        friendsObj.isSelectedUserFriend = !friendsObj.isSelectedUserFriend
+        for case let item as ACFriendsInfo in gabUserArray {
+                        if item.isSelectedUserFriend == true {
+                            selectedArray.addObject(item)
+                        }
+                    }
         gabDirectoryTableView.reloadData()
+    }
+
+    func scrollViewDidEndDragging(scrollView: UIScrollView!, willDecelerate decelerate: Bool) {
+        let currentOffset = scrollView.contentOffset.y;
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
+        
+        if (maximumOffset - currentOffset <= -40.0) {
+            pageNo += 1
+            callApiForGabDirectory(pageNo)
+        }
     }
 
     //MARK:- UIButton Action Methods
     @IBAction func selectAllButtonAction(sender: UIButton) {
         for case let friendsObj as ACFriendsInfo in gabUserArray {
-            friendsObj.userStatus = true
+            friendsObj.isSelectedUserFriend = true
         }
         selectAllButton.selected = true
         gabDirectoryTableView.reloadData()
     }
     
+    //MARK:- Web API Methods
+    func callApiForGabDirectory(pageNo:NSInteger) {
+        if kAppDelegate.hasConnectivity() {
+            let dict = NSMutableDictionary()
+            dict[ACUserId] = NSUserDefaults.standardUserDefaults().valueForKey("ACUserID")
+            dict["keyword"] = ""
+            let params: [String : AnyObject] = [
+                "user": dict ,
+                "page" : pageNo,
+                "sort" : "first_name"
+                //                    "device_id" : "65r34r346r6rt43r76t6"
+            ]
+            ServiceHelper.sharedInstance.createPostRequest(params, apiName: "request_apis/contact_list", completion: { (response, error) in
+                if error != nil {
+                    AlertController.alert((error?.localizedDescription)!)
+                }
+                if response != nil {
+                    let res = response as! NSMutableDictionary
+                    if res.objectForKeyNotNull("responseCode", expected: 0) as! NSInteger == 200 {
+                        self.gabUserArray.addObjectsFromArray(ACFriendsInfo.getFriendList(res) as [AnyObject])
+                        self.gabDirectoryTableView.reloadData()
+                    } else {
+                        AlertController.alert(res.objectForKeyNotNull("responseMessage", expected: "") as! String)
+                    }
+                }
+            })
+        }
+    }
+    
+
 }

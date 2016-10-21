@@ -50,7 +50,7 @@ class OAuth2Client : NSObject {
         self.retrieveAuthorizationCode ({ (authorizationCode) -> Void in
             if let optionalAuthCode = authorizationCode {
                 // We have the authorization_code, we now need to exchange it for the accessToken by doind a POST request
-                let url:String = "https://www.linkedin.com/oauth/v2/accessToken" //self.oauth2Settings.tokenURL
+                let url:String = self.oauth2Settings.tokenURL
                 
                 let parameters: [String:String] = ["client_id" : self.oauth2Settings.clientID,
                     "grant_type" : "authorization_code",

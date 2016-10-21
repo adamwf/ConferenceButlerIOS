@@ -167,9 +167,7 @@ class ACUserInfo: NSObject {
             let tempDict = dict as! NSDictionary
             requestList.userName = tempDict.objectForKeyNotNullExpectedObj("user_name", expectedObj:"") as! String
             requestList.userImage =  tempDict.objectForKeyNotNullExpectedObj("image", expectedObj:"") as! String
-
-            //            requestList.infoHandels = tempDict["image"] as! String! ?? ""
-            //            requestList.description = tempDict["image"] as! String! ?? ""
+//            requestList.otherInfo = tempDict.objectForKeyNotNullExpectedObj("image", expectedObj:"") as! String
             dummyArray.addObject(requestList)
         }
         return dummyArray
@@ -231,6 +229,7 @@ class ACUserInfo: NSObject {
         userInfo.otherInfo = tempDict.objectForKeyNotNullExpectedObj("other_info", expectedObj:"") as! String
         userInfo.userPhone = tempDict.objectForKeyNotNullExpectedObj("phone", expectedObj:"") as! String
         userInfo.userAddress = tempDict.objectForKeyNotNullExpectedObj("address", expectedObj:"") as! String
+//        userInfo.isFriend = tempDict.objectForKeyNotNull("is_friend", expected: 0) as! Bool
         for case let item as NSDictionary in (tempDict.objectForKeyNotNullExpectedObj("social_login", expectedObj:NSArray()) as! NSArray) {
             let socialObj = ACUserInfo()
             socialObj.socialUserName = item.objectForKeyNotNullExpectedObj("user_name", expectedObj:"") as! String
@@ -262,11 +261,11 @@ class ACUserInfo: NSObject {
         
         let userInfo = ACUserInfo()
         
-        let tempDict = dict as! NSDictionary
+        let tempDict = (dict as! NSDictionary).objectForKeyNotNull("privacy_status", expected: NSDictionary() ) as! NSDictionary
         
         userInfo.userID = String(format: "%d",tempDict.objectForKeyNotNullExpectedObj("id", expectedObj:0) as! NSInteger)
         userInfo.isName = (tempDict.objectForKeyNotNullExpectedObj("name", expectedObj:0) as! Bool)
-        userInfo.userImage = tempDict.objectForKeyNotNullExpectedObj("image", expectedObj:"") as! String
+//        userInfo.userImage = tempDict.objectForKeyNotNullExpectedObj("image", expectedObj:"") as! String
         userInfo.isEmail = tempDict.objectForKeyNotNullExpectedObj("email", expectedObj:0) as! Bool
         userInfo.isHobbies = tempDict.objectForKeyNotNullExpectedObj("hobbies", expectedObj:0) as! Bool
         userInfo.isChildren = tempDict.objectForKeyNotNullExpectedObj("children", expectedObj:0) as! Bool

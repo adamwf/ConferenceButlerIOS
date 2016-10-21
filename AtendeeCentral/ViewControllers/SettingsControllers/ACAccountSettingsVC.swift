@@ -21,7 +21,7 @@ class ACAccountSettingsVC: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        itemArray = ["Auto-Add GAB","Advance Settings","Change Password","Ad Free Version","Font +","Logout"]
+        itemArray = ["Advance Settings","Change Password","Ad Free Version","Font +","Logout"]
         settingTblView.reloadData()
     }
 
@@ -52,7 +52,8 @@ class ACAccountSettingsVC: UIViewController {
         let settingCell = tableView.dequeueReusableCellWithIdentifier("ACSettingsTVCellID", forIndexPath: indexPath) as! ACSettingsTVCell
         settingCell.rightArrowImgView.hidden = indexPath.row == 0 ? true : false
 
-        settingCell.statusSwitch.hidden = indexPath.row == 0 ? false : true
+//        settingCell.statusSwitch.hidden = indexPath.row == 0 ? false : true
+        settingCell.statusSwitch.hidden = true
         settingCell.itemNameLabel.text = itemArray.objectAtIndex(indexPath.row) as? String
         
         return settingCell
@@ -61,21 +62,21 @@ class ACAccountSettingsVC: UIViewController {
     // MARK: - TableView Delegate Methods
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.row {
+//        case 0:
+//            break
         case 0:
-            break
-        case 1:
             let advanceSettings = self.storyboard?.instantiateViewControllerWithIdentifier("ACAdvanceSettingVCID") as! ACAdvanceSettingVC
             self.navigationController?.pushViewController(advanceSettings, animated: true)
             break
-        case 2:
+        case 1:
             let changePassword = self.storyboard?.instantiateViewControllerWithIdentifier("ACChangePasswordVCID") as! ACChangePasswordVC
             self.navigationController?.pushViewController(changePassword, animated: true)
             break
-        case 3:
+        case 2:
             let adFreeVC = self.storyboard?.instantiateViewControllerWithIdentifier("ACADFreeVCID") as! ACADFreeVC
             self.navigationController?.pushViewController(adFreeVC, animated: true)
             break
-        case 4:
+        case 3:
             let fontChangeVC = self.storyboard?.instantiateViewControllerWithIdentifier("ACFontChangeVCID") as! ACFontChangeVC
             self.navigationController?.pushViewController(fontChangeVC, animated: true)
             break

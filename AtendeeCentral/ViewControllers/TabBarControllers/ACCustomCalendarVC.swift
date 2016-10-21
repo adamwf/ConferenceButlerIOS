@@ -60,7 +60,7 @@ class ACCustomCalendarVC: UIViewController {
 //        placeholderView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[calendarView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["calendarView": calendarView]))
 //        placeholderView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[calendarView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["calendarView": calendarView]))
         self.navigationItem.title = "Calendar"
-        self.navigationItem.leftBarButtonItem = self.leftBarButton("back")
+        self.navigationItem.leftBarButtonItem = self.leftBarButton("backArrow")
         monthLabel.text = CVDate(date: NSDate()).globalDescription
         
         

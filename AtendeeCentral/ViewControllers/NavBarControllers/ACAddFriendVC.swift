@@ -9,35 +9,8 @@
 import UIKit
 
 class ACAddFriendVC: UIViewController,customGroupDelegate {
-
-//    let dict: NSMutableDictionary? = [
-//        "userID" : "100",
-//        "userName" : "Kris Stewart",
-//        "userDetail" : "Fb Username",
-//        "userEmail" : "abc@xyz.com",
-//        "userImage" : "user1",
-//        "userStatus" : 0
-//        ]
-//    
-//    let dict1: NSMutableDictionary? = [
-//        "userID" : "100",
-//        "userName" : "Angela William",
-//        "userDetail" : "Insta USername",
-//        "userEmail" : "abc@xyz.com",
-//        "userImage" : "user2",
-//        "userStatus" : 0
-//        ]
-//    
-//    let dict2: NSMutableDictionary? = [
-//        "userID" : "100",
-//        "userName" : "Angela William",
-//        "userDetail" : "Insta USername",
-//        "userEmail" : "abc@xyz.com",
-//        "userImage" : "user2",
-//        "userStatus" : 0
-//    ]
     
-     var pickerDataSource = ["Name", "Email", "Username"];
+    var pickerDataSource = ["Name", "Email", "Username"];
     var  userProfileArray = NSMutableArray()
     var selectedArray = NSMutableArray()
     var sortingKey : String = ""
