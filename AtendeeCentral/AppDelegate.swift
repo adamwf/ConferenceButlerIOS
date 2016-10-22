@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         print(NSUserDefaults.standardUserDefaults().valueForKey("size"))
+        let settings : UIUserNotificationSettings =  UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        UIApplication.sharedApplication().registerForRemoteNotifications()
         self.setUpDefaults()
         Fabric.with([Twitter.self])
         // Override point for customization after application launch.
@@ -72,9 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = navController
         self.window?.makeKeyAndVisible()
         
-        let settings : UIUserNotificationSettings =  UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
-        UIApplication.sharedApplication().registerForRemoteNotifications()
+       
 
     }
 
@@ -104,25 +105,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        NSUserDefaults.standardUserDefaults().setValue("it6r56dv5jjr654i", forKey: "device_token")
+        NSUserDefaults.standardUserDefaults().setValue("811e90a2cb4c2de225120e1c6192fc12f5662876", forKey: "device_token")
         NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject])
     {
-        let userDict = userInfo["aps"] as! Dictionary <String, AnyObject>
-        
-        //        if userInfo["Notification_type"] as! String == "offer_sent"
-        //        {
-        //
-        //        } else {
-        AlertController.alert("", message: (userDict["alert"] as? String)!, buttons: ["OK"], tapBlock: { (alertAction, position) -> Void in
-            if position == 0 {
-                // do nothing
-            } else if position == 1 {
-            }
-        })
-        //        }
+//        let userDict = userInfo["aps"] as! Dictionary <String, AnyObject>
+//        
+//        if userInfo["notification_type"] as! String == "Community Center" {
+//            
+//            alert("", message:userDict["alert"] as! String, buttons: ["OK"], controller: kAppDelegate.navigat) { (alertAction, position) in
+//                if position == 0 {
+//                    if userInfo["status"] as! String == "Deactivated" {
+//                        if NSUserDefaults.standardUserDefaults().valueForKey("OCCUserID") != nil  {
+//                            let changeHomeCCVC = ChangeHCCVC(nibName: "ChangeHCCVC", bundle: nil)
+//                            changeHomeCCVC.isFromNotification = true
+//                            changeHomeCCVC.isFromLogin = false
+//                            kAppDelegate.navigat.presentViewController(changeHomeCCVC, animated: true, completion: nil)
+//                        }
+//                    }
+//                }
+//            }
+//        } else {
+//            alert("Sorry!", message:"Your access has been revoked by admin.", buttons: ["OK"], controller: kAppDelegate.navigat) { (alertAction, position) in
+//                if position == 0 {
+//                    if NSUserDefaults.standardUserDefaults().valueForKey("OCCUserID") != nil  {
+//                        delay(0.1, closure: {
+//                            self.forceLogOut()
+//                        })
+//                        
+//                    }
+//                }
+//            }
+//        }
     }
 
 }

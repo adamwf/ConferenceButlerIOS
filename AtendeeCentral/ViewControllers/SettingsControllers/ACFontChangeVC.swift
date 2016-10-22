@@ -57,6 +57,7 @@ class ACFontChangeVC: UIViewController {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let settingCell = tableView.dequeueReusableCellWithIdentifier("ACSettingsTVCellID", forIndexPath: indexPath) as! ACSettingsTVCell
         settingCell.itemNameLabel.text = itemArray.objectAtIndex(indexPath.row) as? String
+        print(NSUserDefaults.standardUserDefaults().objectForKey("rowValue")?.integerValue)
         if indexPath.row == NSUserDefaults.standardUserDefaults().objectForKey("rowValue")?.integerValue {
             settingCell.selectButton.selected = true
         } else {
@@ -64,22 +65,22 @@ class ACFontChangeVC: UIViewController {
         }
         switch indexPath.row {
         case 0:
-            settingCell.itemNameLabel.font = UIFont(name:"Raleway-Regular", size:20)
+            settingCell.itemNameLabel.font = UIFont(name:"VarelaRound", size:20)
             break
         case 1:
-            settingCell.itemNameLabel.font = UIFont(name:"Raleway-Regular", size:18)
+            settingCell.itemNameLabel.font = UIFont(name:"VarelaRound", size:18)
             break
         case 2:
-            settingCell.itemNameLabel.font = UIFont(name:"Raleway-Regular", size:16)
+            settingCell.itemNameLabel.font = UIFont(name:"VarelaRound", size:16)
             break
         case 3:
-            settingCell.itemNameLabel.font = UIFont(name:"Raleway-Regular", size:14)
+            settingCell.itemNameLabel.font = UIFont(name:"VarelaRound", size:14)
             break
         case 4:
-            settingCell.itemNameLabel.font = UIFont(name:"Raleway-Regular", size:12)
+            settingCell.itemNameLabel.font = UIFont(name:"VarelaRound", size:12)
             break
         default:
-            settingCell.itemNameLabel.font = UIFont(name:"Raleway-Regular", size:10)
+            settingCell.itemNameLabel.font = UIFont(name:"VarelaRound", size:10)
             break
         }
         return settingCell
@@ -115,6 +116,7 @@ class ACFontChangeVC: UIViewController {
             break
         }
         NSUserDefaults.standardUserDefaults().setObject(String(format: "%d", indexPath.row), forKey: "rowValue")
+        print(NSUserDefaults.standardUserDefaults().objectForKey("rowValue")?.integerValue)
         NSUserDefaults.standardUserDefaults().synchronize()
         fontChngTableView.reloadData()
     }

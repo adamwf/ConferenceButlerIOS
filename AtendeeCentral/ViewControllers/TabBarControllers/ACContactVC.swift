@@ -24,6 +24,7 @@ class ACContactVC: UIViewController {
     
     var sortingKey : String = ""
     var pageNo : NSInteger = 1
+    var maxPageNo : NSInteger = 1
     
     //MARK:- View Life Cycle
     override func viewDidLoad() {
@@ -92,7 +93,7 @@ class ACContactVC: UIViewController {
         let currentOffset = scrollView.contentOffset.y;
         let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
         
-        if (maximumOffset - currentOffset <= -40.0) {
+        if (maximumOffset - currentOffset <= -40.0 && pageNo < maxPageNo+1) {
             pageNo += 1
             callApiForContactList(pageNo)
         }
@@ -175,6 +176,7 @@ class ACContactVC: UIViewController {
                     let res = response as! NSMutableDictionary
                     if res.objectForKeyNotNull("responseCode", expected: 0) as! NSInteger == 200 {
                         self.userProfileArray.addObjectsFromArray(ACUserInfo.getContactInfo(res) as [AnyObject])
+                        self.maxPageNo = res.objectForKeyNotNull("total_pages", expected: 0) as! NSInteger
                         self.gabTblView.reloadData()
                     } else {
                         AlertController.alert(res.objectForKeyNotNull("responseMessage", expected: "") as! String)

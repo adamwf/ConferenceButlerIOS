@@ -13,6 +13,8 @@ class ACTrendingVC: UIViewController {
     @IBOutlet weak var trendingTblView: UITableView!
     var trendingArray = NSMutableArray()
     var pageNo : NSInteger = 1
+    var maxPageNo : NSInteger = 1
+    
     var adImg : String = ""
     
     //MARK:- View Life Cycle
@@ -63,14 +65,15 @@ class ACTrendingVC: UIViewController {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
+        
+        if indexPath.row == 0 && NSUserDefaults.standardUserDefaults().valueForKey("ACPaymentType") as! String == "free" {
             let cell = tableView.dequeueReusableCellWithIdentifier("ACAdTVCellID", forIndexPath: indexPath) as! ACAdTVCell
             cell.adImgView.sd_setImageWithURL(NSURL(string: adImg), placeholderImage: UIImage(named: "plc_evntLarge"))
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier("ACViewersTVCellID", forIndexPath: indexPath) as!
             ACViewersTVCell
-            let trends = trendingArray.objectAtIndex(indexPath.row) as! ACUserInfo
+            let trends = trendingArray.objectAtIndex(NSUserDefaults.standardUserDefaults().valueForKey("ACPaymentType") as! String == "free" ? indexPath.row - 1 : indexPath.row) as! ACUserInfo
             cell.viewersUserName.text = trends.userName
             cell.viewersImgView.sd_setImageWithURL(NSURL(string:trends.userImage), placeholderImage: UIImage(named: "user"))
             cell.selectionButton.tag = indexPath.row + 100
@@ -88,7 +91,7 @@ class ACTrendingVC: UIViewController {
         let currentOffset = scrollView.contentOffset.y;
         let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
         
-        if (maximumOffset - currentOffset <= -40.0) {
+        if (maximumOffset - currentOffset <= -40.0 && pageNo < maxPageNo+1) {
             pageNo += 1
             callApiForTrendingList(pageNo)
         }
@@ -109,6 +112,7 @@ class ACTrendingVC: UIViewController {
                     if res.objectForKeyNotNull("responseCode", expected: 0) as! NSInteger == 200 {
                         self.trendingArray.addObjectsFromArray(ACUserInfo.getTrendingList(res) as [AnyObject])
                         self.adImg = (((res.objectForKeyNotNull("ads", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("image", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("standard", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("url", expected: "") as! String
+                        self.maxPageNo = res.objectForKeyNotNull("total_pages", expected: 0) as! NSInteger
                         self.trendingTblView.reloadData()
                     } else {
                         AlertController.alert(res.objectForKeyNotNull("responseMessage", expected: "") as! String)

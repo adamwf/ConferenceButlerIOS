@@ -82,7 +82,9 @@ class ACInboxVC: UIViewController {
     
     //MARK:- Tableview Datasource Methods
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(messageListArray.count)
         return messageListArray.count
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

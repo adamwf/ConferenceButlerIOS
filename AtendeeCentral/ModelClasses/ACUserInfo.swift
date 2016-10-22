@@ -64,6 +64,13 @@ class ACUserInfo: NSObject {
     var isTwitter : Bool = false
     var isAddress : Bool = false
     var socialUserNameArray : NSMutableArray = []
+    var socialProvider : String = ""
+    
+     var linkedinUserName : String = ""
+     var googleUserName : String = ""
+     var twitterUserName : String = ""
+     var instagramUserName : String = ""
+     var facebookUserName : String = ""
     
     class func getUserInfo(dict : NSMutableDictionary) -> NSMutableArray {
         let dummyArray = NSMutableArray()
@@ -213,7 +220,7 @@ class ACUserInfo: NSObject {
         return dummyArray
     }
 
-    class func getProfileInfo(dict : AnyObject) -> ACUserInfo {
+    class func getProfileInfo(dict : AnyObject, selfInfo:Bool) -> ACUserInfo {
         let userInfo = ACUserInfo()
         let tempDict = dict as! NSDictionary
         userInfo.userID = String(format: "%d",tempDict.objectForKeyNotNullExpectedObj("id", expectedObj:0) as! NSInteger)
@@ -229,13 +236,36 @@ class ACUserInfo: NSObject {
         userInfo.otherInfo = tempDict.objectForKeyNotNullExpectedObj("other_info", expectedObj:"") as! String
         userInfo.userPhone = tempDict.objectForKeyNotNullExpectedObj("phone", expectedObj:"") as! String
         userInfo.userAddress = tempDict.objectForKeyNotNullExpectedObj("address", expectedObj:"") as! String
-//        userInfo.isFriend = tempDict.objectForKeyNotNull("is_friend", expected: 0) as! Bool
+        
+        if selfInfo == false {
+            userInfo.isFriend = tempDict.objectForKeyNotNull("is_friend", expected: 0) as! Bool
+        }
         for case let item as NSDictionary in (tempDict.objectForKeyNotNullExpectedObj("social_login", expectedObj:NSArray()) as! NSArray) {
             let socialObj = ACUserInfo()
-            socialObj.socialUserName = item.objectForKeyNotNullExpectedObj("user_name", expectedObj:"") as! String
-            userInfo.socialUserNameArray.addObject(socialObj.socialUserName)
+            
+            if(item.objectForKeyNotNull("provider", expected: "") as! String == "linkedin") {
+                socialObj.islinkedIn = item.objectForKeyNotNull("login_status", expected: 0) as! Bool
+                socialObj.socialUserName = item.objectForKeyNotNullExpectedObj("user_name", expectedObj:"") as! String
+            } else if (item.objectForKeyNotNull("provider", expected: "") as! String == "google") {
+                socialObj.isGoogle =  item.objectForKeyNotNull("login_status", expected: 0) as! Bool
+                socialObj.socialUserName = item.objectForKeyNotNullExpectedObj("user_name", expectedObj:"") as! String
+            } else if (item.objectForKeyNotNull("provider", expected: "") as! String == "facebook") {
+                socialObj.isFacebook =  item.objectForKeyNotNull("login_status", expected: 0) as! Bool
+                socialObj.socialUserName = item.objectForKeyNotNullExpectedObj("user_name", expectedObj:"") as! String
+            } else if (item.objectForKeyNotNull("provider", expected: "") as! String == "instagram") {
+                socialObj.isInstagram =  item.objectForKeyNotNull("login_status", expected: 0) as! Bool
+                socialObj.socialUserName = item.objectForKeyNotNullExpectedObj("user_name", expectedObj:"") as! String
+            } else {
+                socialObj.isTwitter =  item.objectForKeyNotNull("login_status", expected: 0) as! Bool
+                socialObj.socialUserName = item.objectForKeyNotNullExpectedObj("user_name", expectedObj:"") as! String
+            }
+            socialObj.socialProvider = item.objectForKeyNotNull("provider", expected: "") as! String
+            userInfo.socialUserNameArray.addObject(socialObj)
         }
-        userInfo.userInfoHandlers = (userInfo.socialUserNameArray.mutableCopy() as! NSArray).componentsJoinedByString(",")
+        
+        for case let item as ACUserInfo in userInfo.socialUserNameArray {
+            userInfo.userInfoHandlers = userInfo.userInfoHandlers.stringByAppendingString(String(format: "%@, ",item.socialUserName))
+        }
         userInfo.qrImage = tempDict.objectForKeyNotNull("social_code", expected: "") as! String
         return userInfo
     }
@@ -265,7 +295,8 @@ class ACUserInfo: NSObject {
         
         userInfo.userID = String(format: "%d",tempDict.objectForKeyNotNullExpectedObj("id", expectedObj:0) as! NSInteger)
         userInfo.isName = (tempDict.objectForKeyNotNullExpectedObj("name", expectedObj:0) as! Bool)
-//        userInfo.userImage = tempDict.objectForKeyNotNullExpectedObj("image", expectedObj:"") as! String
+        userInfo.userImage = tempDict.objectForKeyNotNullExpectedObj("profile_image", expectedObj:"") as! String
+        
         userInfo.isEmail = tempDict.objectForKeyNotNullExpectedObj("email", expectedObj:0) as! Bool
         userInfo.isHobbies = tempDict.objectForKeyNotNullExpectedObj("hobbies", expectedObj:0) as! Bool
         userInfo.isChildren = tempDict.objectForKeyNotNullExpectedObj("children", expectedObj:0) as! Bool
@@ -277,7 +308,7 @@ class ACUserInfo: NSObject {
         userInfo.isGoogle = tempDict.objectForKeyNotNullExpectedObj("google", expectedObj:0) as! Bool
         userInfo.isInstagram = tempDict.objectForKeyNotNullExpectedObj("instagram", expectedObj:0) as! Bool
         userInfo.isAddress = tempDict.objectForKeyNotNullExpectedObj("address", expectedObj:0) as! Bool
-        
+        userInfo.isImage = tempDict.objectForKeyNotNull("image", expected: 0) as! Bool
         //        userInfo.userInfoHandlers = (tempDict.objectForKeyNotNullExpectedObj("social_login", expectedObj:NSArray()) as! NSArray).componentsJoinedByString(",")
         
         

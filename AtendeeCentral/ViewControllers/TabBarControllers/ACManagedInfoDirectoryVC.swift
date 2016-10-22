@@ -38,6 +38,7 @@ class ACManagedInfoDirectoryVC: UIViewController,UITableViewDataSource,UITableVi
         manageInfoDirectoryTableView.rowHeight = UITableViewAutomaticDimension
         self.navigationItem.title = isFromDirectory ? "Manage Info Directory" : "Manage Info Search"
         self.navigationItem.leftBarButtonItem = ACAppUtilities.leftBarButton("backArrow",controller: self)
+        
     }
     
     // MARK: - Selector Methods
@@ -180,6 +181,8 @@ class ACManagedInfoDirectoryVC: UIViewController,UITableViewDataSource,UITableVi
     
     @IBAction func showInDirectoryButtonAction(sender: AnyObject) {
         showInDirectoryButton.selected = !showInDirectoryButton.selected
+         let userInfo = manageInfoDictArray [0] as! ACUserInfo
+        userInfo.isImage = !userInfo.isImage
     }
     
 //    func buttonAction(sender : UIButton ) -> Void {
@@ -202,6 +205,7 @@ class ACManagedInfoDirectoryVC: UIViewController,UITableViewDataSource,UITableVi
         if kAppDelegate.hasConnectivity() {
             let dict = NSMutableDictionary()
             dict[ACUserId] = NSUserDefaults.standardUserDefaults().valueForKey("ACUserID")
+            dict[ACPrivacyType] = isFromDirectory ? "register_user" : "search_engine"
             let params: [String : AnyObject] = [
                 "user": dict ,
                 ]
@@ -213,6 +217,7 @@ class ACManagedInfoDirectoryVC: UIViewController,UITableViewDataSource,UITableVi
                     let res = response as! NSMutableDictionary
                     if res.objectForKeyNotNull("responseCode", expected: 0) as! NSInteger == 200 {
                         self.manageInfoDictArray.addObject(ACUserInfo.getGABDirectoryInfo(res))
+                       self.showInDirectoryButton.selected = (res.objectForKeyNotNull("privacy_status", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("image", expected: 0) as! Bool
                         self.manageInfoDirectoryTableView.delegate = self
                         self.manageInfoDirectoryTableView.dataSource = self
                         self.manageInfoDirectoryTableView.reloadData()
@@ -232,15 +237,16 @@ class ACManagedInfoDirectoryVC: UIViewController,UITableViewDataSource,UITableVi
             dict[ACUserId] = NSUserDefaults.standardUserDefaults().valueForKey("ACUserID")
             let status = NSMutableDictionary()
              let userInfo = manageInfoDictArray [0] as! ACUserInfo
-            status[ACUserName] = userInfo.isName
+            status[ACIsName] = userInfo.isName
             status[ACHobbies] = userInfo.isHobbies
             status[ACEmail] = userInfo.isEmail
             status[ACPhone] = userInfo.isPhone
             status[ACAddress] = userInfo.isAddress
             status[ACOtherInfo] = userInfo.isOtherInfo
+            status[ACUserImage] = showInDirectoryButton.selected ? true : false
             status[ACRelationStatus] = true
             status[ACChildren] = true
-            status[ACUserImage] = true
+            status[ACUserImage] = userInfo.isImage
             status[ACSocialCode] = true
             status[ACIsGoogle] = userInfo.isGoogle
             status[ACIsFacebook] = userInfo.isFacebook

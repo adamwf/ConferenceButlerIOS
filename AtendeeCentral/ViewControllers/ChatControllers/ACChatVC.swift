@@ -44,7 +44,7 @@ class ACChatVC: UIViewController,UIImagePickerControllerDelegate,UINavigationCon
     
     @IBOutlet weak var dayPicker: MZDayPicker!
     var stickerArray = NSMutableArray()
-    
+    var eventArray = NSMutableArray()
     var audioRecorder : AVAudioRecorder!
     var audioPlayer : AVAudioPlayer!
     
@@ -54,7 +54,7 @@ class ACChatVC: UIViewController,UIImagePickerControllerDelegate,UINavigationCon
     
     var pickerController:UIImagePickerController?=UIImagePickerController()
     private var texts = ["Edit", "Delete", "Report"]
-    
+    let eventDetailTextView = UITextView()
     private var popover: Popover!
     private var popoverOptions: [PopoverOption] = [
         .Type(.Down),
@@ -69,7 +69,7 @@ class ACChatVC: UIViewController,UIImagePickerControllerDelegate,UINavigationCon
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        NSNotificationCenter.defaultCenter().postNotificationName("tabViewChangeNotification", object: nil,userInfo:["hiddenTrue" : "0"] )
+    NSNotificationCenter.defaultCenter().postNotificationName("tabViewChangeNotification", object: nil,userInfo:["hiddenTrue" : "0"] )
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -98,6 +98,7 @@ class ACChatVC: UIViewController,UIImagePickerControllerDelegate,UINavigationCon
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ACChatVC.keyboardWillAppear), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ACChatVC.keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
         self.getDummyData()
+        callApiForEventsList()
     }
     
     // MARK: - Selector Methods
@@ -142,13 +143,13 @@ class ACChatVC: UIViewController,UIImagePickerControllerDelegate,UINavigationCon
             let separatorLabel = UILabel(frame:CGRect(x: 0, y: 50, width: popView.frame.size.width, height: 1))
             separatorLabel.backgroundColor = RGBA(240, g: 240, b: 240, a: 0.7)
             
-            let eventDetailTextView = UITextView(frame:CGRect(x: 0, y: 60, width: popView.frame.size.width, height: 80))
+            eventDetailTextView.frame = CGRect(x: 0, y: 60, width: popView.frame.size.width, height: 80)
             eventDetailTextView.textContainerInset = UIEdgeInsetsMake(0, 10, 5, 10)
             eventDetailTextView.font = KAppRegularFont
             eventDetailTextView.textColor = UIColor.grayColor()
             eventDetailTextView.editable = false
             eventDetailTextView.selectable = false
-            eventDetailTextView.text = "Neque porro quisquam est qui ipsum Neque porro quisquam est qui ipsum Neque porro quisquam est qui ipsum Neque porro quisquam est qui ipsum Neque porro quisquam est qui ipsum"
+            eventDetailTextView.text = "No Scheduled Events"
             popView.addSubview(customAlertView)
             popView.addSubview(eventDetailTextView)
             popView.addSubview(separatorLabel)
@@ -239,6 +240,32 @@ class ACChatVC: UIViewController,UIImagePickerControllerDelegate,UINavigationCon
         paraStyle.alignment = NSTextAlignment.Left
         para.addAttribute(NSParagraphStyleAttributeName, value: paraStyle, range: NSRange(location: 0,length: para.length))
         return para
+    }
+    
+    func getFormattedDate(strDate : String) -> NSDateComponents {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let date = dateFormatter.dateFromString(strDate)
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Day,.Month,.Year], fromDate: date!)
+        return components
+    }
+    
+    //MARK: - Calendar Delegate Methods
+    func dayPicker(dayPicker: MZDayPicker!, didSelectDay day: MZDay!) {
+        print(dayPicker.currentDate)
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Day,.Month,.Year], fromDate: dayPicker.currentDate)
+        print(components.day,components.month,components.year)
+        for case let item as ACEventInfo in self.eventArray {
+            let component = self.getFormattedDate(item.eventStartDate)
+            
+            if component.day == components.day && component.month == components.month && component.year == components.year {
+                eventDetailTextView.text = String(format: "%@\n%@",item.eventName,item.eventDetail)
+                break
+            }
+        }
+
     }
     
     // MARK: - TableView DataSource Methods
@@ -838,4 +865,26 @@ class ACChatVC: UIViewController,UIImagePickerControllerDelegate,UINavigationCon
             self.getChatDummyData("",isAudio: false,isImage: true,isVideo: false,image: localPath,video: "",audio: "")
         }
     }
+    
+    //MARK:- Web API Methods
+    func callApiForEventsList() {
+        if kAppDelegate.hasConnectivity() {
+            let params: [String : AnyObject] = [
+                :            ]
+            ServiceHelper.sharedInstance.createGetRequest(params, apiName: "event_apis/event_list", completion: { (response, error) in
+                if error != nil {
+                    AlertController.alert((error?.localizedDescription)!)
+                }
+                if response != nil {
+                    let res = response as! NSMutableDictionary
+                    if res.objectForKeyNotNull("responseCode", expected: 0) as! NSInteger == 200 {
+                        self.eventArray.addObjectsFromArray(ACEventInfo.getEventList(res) as [AnyObject])
+                    } else {
+                        AlertController.alert(res.objectForKeyNotNull("responseMessage", expected: "") as! String)
+                    }
+                }
+            })
+        }
+    }
 }
+

@@ -58,5 +58,7 @@ let ACIsInstagram = "instagram"
 let ACIsTwitter = "twitter"
 let ACSocialCode = "social_code"
 let ACPrivacyType = "privacy_type"
+let ACPaymentType = "payment_type"
+
 //let ACPhone = "phoneNumber"
 //let ACAccessCode = "code"

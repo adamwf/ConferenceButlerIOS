@@ -147,7 +147,7 @@ class ACProfileVC: ACBaseVC {
                 if response != nil {
                     let res = response as! NSMutableDictionary
                     if res.objectForKeyNotNull("responseCode", expected: 0) as! NSInteger == 200 {
-                        self.userInfo = ACUserInfo.getProfileInfo(res.objectForKeyNotNull("user", expected: NSDictionary())as! NSDictionary)
+                        self.userInfo = ACUserInfo.getProfileInfo((res.objectForKeyNotNull("user", expected: NSDictionary())as! NSDictionary), selfInfo : true)
                         self.usernameLabel.text = self.userInfo.userName
                         self.emailLabel.text = self.userInfo.userEmail
                         self.userImageView.sd_setImageWithURL(NSURL(string: self.userInfo.userImage),placeholderImage: UIImage(named: "user"))

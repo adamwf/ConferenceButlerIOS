@@ -80,7 +80,7 @@ class ACGABUserProfileVC: UIViewController,UITableViewDelegate, UITableViewDataS
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let socialUserName = userInfo.socialUserNameArray.objectAtIndex(indexPath.row) as! String
         let cell = tableView.dequeueReusableCellWithIdentifier("ACDirectoryHandlerTVCellID", forIndexPath: indexPath) as! ACDirectoryHandlerTVCell
-
+        
         switch indexPath.row {
         case 0:
             cell.socialMediaImgView.image = UIImage(named:"icon1")
@@ -111,6 +111,14 @@ class ACGABUserProfileVC: UIViewController,UITableViewDelegate, UITableViewDataS
                 return cell
     }
     
+//     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        
+//        let headerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 40))
+//        
+//        
+//        return headerView
+//            }
+//    
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     } 
@@ -239,7 +247,7 @@ class ACGABUserProfileVC: UIViewController,UITableViewDelegate, UITableViewDataS
     func callApiForProfile() {
         if kAppDelegate.hasConnectivity() {
             let params: [String : AnyObject] = [
-                ACUserId: NSUserDefaults.standardUserDefaults().valueForKey("ACUserID")! ,
+                "viewer_id": NSUserDefaults.standardUserDefaults().valueForKey("ACUserID")! ,
                 ACQRCode : strQRCode
             ]
             ServiceHelper.sharedInstance.createPostRequest(params, apiName: "event_apis/scan_qr", completion: { (response, error) in
@@ -249,7 +257,7 @@ class ACGABUserProfileVC: UIViewController,UITableViewDelegate, UITableViewDataS
                 if response != nil {
                     let res = response as! NSMutableDictionary
                     if res.objectForKeyNotNull("responseCode", expected: 0) as! NSInteger == 200 {
-                        self.userInfo = ACUserInfo.getProfileInfo(res.objectForKeyNotNull("user", expected: NSDictionary())as! NSDictionary)
+                        self.userInfo = ACUserInfo.getProfileInfo((res.objectForKeyNotNull("user", expected: NSDictionary())as! NSDictionary), selfInfo : false)
                         self.strUserID = self.userInfo.userID
                         self.navigationItem.title = self.userInfo.userName
                         self.nameLabel.text = self.userInfo.userName
@@ -282,8 +290,8 @@ class ACGABUserProfileVC: UIViewController,UITableViewDelegate, UITableViewDataS
                 if response != nil {
                     let res = response as! NSMutableDictionary
                     if res.objectForKeyNotNull("responseCode", expected: 0) as! NSInteger == 200 {
-                        self.userProfileArray.addObject(ACUserInfo.getProfileInfo(res.objectForKeyNotNull("user", expected: NSDictionary())as! NSDictionary))
-                        self.userInfo = ACUserInfo.getProfileInfo(res.objectForKeyNotNull("user", expected: NSDictionary())as! NSDictionary)
+//                        self.userProfileArray.addObject(ACUserInfo.getProfileInfo(res.objectForKeyNotNull("user", expected: NSDictionary())as! NSDictionary))
+                        self.userInfo = ACUserInfo.getProfileInfo((res.objectForKeyNotNull("user", expected: NSDictionary())as! NSDictionary), selfInfo : false)
                         self.navigationItem.title = String(format:"GAB Screen <%@>",self.userInfo.userName)
                         self.nameLabel.text = self.userInfo.userName
                         self.emailIdLabel.text = self.userInfo.userEmail
@@ -300,4 +308,39 @@ class ACGABUserProfileVC: UIViewController,UITableViewDelegate, UITableViewDataS
         }
     }
     
+    func callApiForDeclineRequest() {
+        if kAppDelegate.hasConnectivity() {
+            
+            let dict = NSMutableDictionary()
+            dict[ACUserId] = NSUserDefaults.standardUserDefaults().valueForKey("ACUserID")
+            dict[ACFriendId] = strUserID
+            let params: [String : AnyObject] = [
+                "user": dict ,
+                ]
+            
+            ServiceHelper.sharedInstance.createPostRequest(params, apiName: "request_apis/reject_request", completion: { (response, error) in
+                if error != nil {
+                    AlertController.alert((error?.localizedDescription)!)
+                }
+                if response != nil {
+                    let res = response as! NSMutableDictionary
+                    if res.objectForKeyNotNull("responseCode", expected: 0) as! NSInteger == 200 {
+                        AlertController.alert("", message:res.objectForKeyNotNull("responseMessage", expected: "") as! String, buttons: ["OK"], tapBlock: { (alertAction, position) -> Void in
+                            if position == 0 {
+                                if self.isFromQRCode == true {
+                                    self.callApiForProfile()
+                                } else {
+                                    self.callApiForViewProfile(self.strUserID)
+                                }
+                            }
+                        })
+                        
+                    } else {
+                        AlertController.alert(res.objectForKeyNotNull("responseMessage", expected: "") as! String)
+                    }
+                }
+            })
+        }
+    }
+
 }

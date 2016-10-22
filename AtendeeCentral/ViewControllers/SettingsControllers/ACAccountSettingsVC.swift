@@ -50,7 +50,7 @@ class ACAccountSettingsVC: UIViewController {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let settingCell = tableView.dequeueReusableCellWithIdentifier("ACSettingsTVCellID", forIndexPath: indexPath) as! ACSettingsTVCell
-        settingCell.rightArrowImgView.hidden = indexPath.row == 0 ? true : false
+//        settingCell.rightArrowImgView.hidden = indexPath.row == 0 ? true : false
 
 //        settingCell.statusSwitch.hidden = indexPath.row == 0 ? false : true
         settingCell.statusSwitch.hidden = true
@@ -114,6 +114,7 @@ class ACAccountSettingsVC: UIViewController {
                         NSUserDefaults.standardUserDefaults().setValue("", forKey: "ACUserID")
                         NSUserDefaults.standardUserDefaults().setValue(nil, forKey: "ACToken")
                         NSUserDefaults.standardUserDefaults().synchronize()
+                         NSUserDefaults.standardUserDefaults().setValue("2", forKey: "rowValue")
                         kAppDelegate.navController!.popToRootViewControllerAnimated(true)
                     } else {
                         AlertController.alert(res.objectForKeyNotNull("responseMessage", expected: "") as! String)

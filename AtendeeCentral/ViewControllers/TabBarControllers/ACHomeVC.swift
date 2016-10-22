@@ -13,7 +13,8 @@ class ACHomeVC: ACBaseVC  {
     @IBOutlet var homeTableView: UITableView!
     var homeArray = NSMutableArray()
     var pageNo : NSInteger = 1
-
+    var maxPageNo : NSInteger = 1
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,7 +124,8 @@ class ACHomeVC: ACBaseVC  {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let feedObj = homeArray[indexPath.row] as! ACFeedsInfo
-        if feedObj.feedAdImg != nil {
+        print(NSUserDefaults.standardUserDefaults().valueForKey("ACPaymentType"))
+        if feedObj.feedAdImg != nil && NSUserDefaults.standardUserDefaults().valueForKey("ACPaymentType") as! String == "free" {
             let cell = tableView.dequeueReusableCellWithIdentifier("ACAdTVCellID", forIndexPath: indexPath) as! ACAdTVCell
             cell.adImgView.sd_setImageWithURL(feedObj.feedAdImg, placeholderImage: UIImage(named: ""))
             return cell
@@ -157,7 +159,7 @@ class ACHomeVC: ACBaseVC  {
         let currentOffset = scrollView.contentOffset.y;
         let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
         
-        if (maximumOffset - currentOffset <= -40.0) {
+        if (maximumOffset - currentOffset <= -40.0 && pageNo < maxPageNo+1) {
             pageNo += 1
             callApiForFeedsList(pageNo)
         }
@@ -215,6 +217,7 @@ class ACHomeVC: ACBaseVC  {
                     let res = response as! NSMutableDictionary
                     if res.objectForKeyNotNull("responseCode", expected: 0) as! NSInteger == 200 {
                         self.homeArray.addObjectsFromArray(ACFeedsInfo.getFeedsInfo(res) as [AnyObject])
+                        self.maxPageNo = res.objectForKeyNotNull("total_pages", expected: 0) as! NSInteger
                         self.homeTableView.reloadData()
                     } else {
                         AlertController.alert(res.objectForKeyNotNull("responseMessage", expected: "") as! String)

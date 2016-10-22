@@ -22,7 +22,7 @@ class ACCustomTextField: UITextField {
         self.leftViewMode = UITextFieldViewMode.Always
         self.backgroundColor = UIColor.clearColor()
         self.tintColor = KAppTintColor
-        self.attributedPlaceholder = NSAttributedString(string: self.placeholder!, attributes: [NSForegroundColorAttributeName : KAppPlaceholderColor])
+        self.attributedPlaceholder = NSAttributedString(string: self.placeholder!, attributes: [NSForegroundColorAttributeName : UIColor.grayColor()])
         self.textColor = UIColor.darkTextColor()
 //        NSNotificationCenter.defaultCenter().addObserverForName(
 //            "size",
@@ -51,7 +51,7 @@ class ACCustomTextField: UITextField {
         //        self.keyboardType = UIKeyboardType.ASCIICapable
         self.autocorrectionType = UITextAutocorrectionType.No
         //        self.autocapitalizationType = UITextAutocapitalizationType.None
-        self.attributedPlaceholder = NSAttributedString(string: self.placeholder!, attributes: [NSForegroundColorAttributeName : KAppPlaceholderColor ,NSFontAttributeName : UIFont(name:"VarelaRound", size:16)!])
+        self.attributedPlaceholder = NSAttributedString(string: self.placeholder!, attributes: [NSForegroundColorAttributeName : UIColor.grayColor() ,NSFontAttributeName : UIFont(name:"VarelaRound", size:16)!])
         self.font = UIFont(name:"VarelaRound", size:16)
         self.textColor = UIColor.darkTextColor()
     }

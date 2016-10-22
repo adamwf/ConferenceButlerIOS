@@ -53,6 +53,11 @@ class ACLoginVC: ACBaseVC,UIGestureRecognizerDelegate {
     // MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        if NSUserDefaults.standardUserDefaults().valueForKey("ACUserID") != nil {
+            let tabBarVC = self.storyboard?.instantiateViewControllerWithIdentifier("ACCustomTabBarVCID")
+            self.navigationController?.navigationBarHidden = false;
+            self.navigationController!.pushViewController(tabBarVC!, animated: false)
+        }
         self.customInit()
     }
     
@@ -63,6 +68,8 @@ class ACLoginVC: ACBaseVC,UIGestureRecognizerDelegate {
         alertPasswordLabel.text = ""
         alertUserNameLabel.text = ""
         self.navigationController?.navigationBarHidden = true
+        userNameTextField.attributedPlaceholder = NSAttributedString(string: userNameTextField.placeholder!, attributes: [NSForegroundColorAttributeName : UIColor.whiteColor() ,NSFontAttributeName : UIFont(name:"VarelaRound", size:16)!])
+       passwordTextField.attributedPlaceholder = NSAttributedString(string: passwordTextField.placeholder!, attributes: [NSForegroundColorAttributeName : UIColor.whiteColor() ,NSFontAttributeName : UIFont(name:"VarelaRound", size:16)!])
     }
     
     // MARK: Memory Management Methods
@@ -234,7 +241,9 @@ class ACLoginVC: ACBaseVC,UIGestureRecognizerDelegate {
                         NSUserDefaults.standardUserDefaults().setValue((res.objectForKeyNotNull("user", expected: NSDictionary()).objectForKeyNotNull("id", expected: "") as? String ?? ""), forKey: "ACUserID")
                         print(NSUserDefaults.standardUserDefaults().valueForKey("ACUserID"))
                         NSUserDefaults.standardUserDefaults().setValue((res.objectForKeyNotNull("user", expected: NSDictionary()).objectForKeyNotNull("access_token", expected: "") as? String ?? ""), forKey: "ACToken")
+                         NSUserDefaults.standardUserDefaults().setValue((res.objectForKeyNotNull("user", expected: NSDictionary()).objectForKeyNotNull("Payment_type", expected: "") as? String ?? ""), forKey: "ACPaymentType")
                         print(NSUserDefaults.standardUserDefaults().valueForKey("ACToken"))
+                        NSUserDefaults.standardUserDefaults().setValue("2", forKey: "rowValue")
                         NSUserDefaults.standardUserDefaults().synchronize()
                         ACAppData.appInfoSharedInstance.appUserInfo = ACUserInfo.getUserLoginInfo(response!)
                         let tabBarVC = self.storyboard?.instantiateViewControllerWithIdentifier("ACCustomTabBarVCID")
@@ -258,6 +267,7 @@ class ACLoginVC: ACBaseVC,UIGestureRecognizerDelegate {
             dict[ACFirstName] = provider == "facebook" ? info.objectForKeyNotNull("first_name", expected: "") as! String : info.objectForKeyNotNull("firstName", expected: "") as! String
             dict[ACLastName] = provider == "facebook" ? info.objectForKeyNotNull("last_name", expected: "") as! String : info.objectForKeyNotNull("lastName", expected: "") as! String
             dict[ACSocialUID] = provider == "facebook" ? info.objectForKeyNotNull("id", expected: "") as! String : info.objectForKeyNotNull("id", expected: "") as! String
+            dict[ACRole] = "attendee"
             let params: [String : AnyObject] = [
                 "user": dict ,
                 "device_type" : "iOS",
@@ -272,7 +282,9 @@ class ACLoginVC: ACBaseVC,UIGestureRecognizerDelegate {
                     if res.objectForKeyNotNull("responseCode", expected: 0) as! NSInteger == 200 {
                         NSUserDefaults.standardUserDefaults().setValue((res.objectForKeyNotNull("user", expected: NSDictionary()).objectForKeyNotNull("id", expected: "") as? String ?? ""), forKey: "ACUserID")
                         NSUserDefaults.standardUserDefaults().setValue((res.objectForKeyNotNull("user", expected: NSDictionary()).objectForKeyNotNull("access_token", expected: "") as? String ?? ""), forKey: "ACToken")
-                        print(NSUserDefaults.standardUserDefaults().valueForKey("ACToken"))
+                        NSUserDefaults.standardUserDefaults().setValue((res.objectForKeyNotNull("user", expected: NSDictionary()).objectForKeyNotNull("Payment_type", expected: "") as? String ?? ""), forKey: "ACPaymentType")
+                        NSUserDefaults.standardUserDefaults().setValue("2", forKey: "rowValue")
+                    print(NSUserDefaults.standardUserDefaults().valueForKey("ACToken"))
                         NSUserDefaults.standardUserDefaults().synchronize()
                         ACAppData.appInfoSharedInstance.appUserInfo = ACUserInfo.getUserLoginInfo(response!)
                         let tabBarVC = self.storyboard?.instantiateViewControllerWithIdentifier("ACCustomTabBarVCID")

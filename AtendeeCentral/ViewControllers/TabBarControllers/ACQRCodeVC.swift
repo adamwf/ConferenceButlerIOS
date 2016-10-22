@@ -40,11 +40,11 @@ class ACQRCodeVC: UIViewController,QRCodeReaderViewControllerDelegate {
         self.navigationController?.navigationBar.topItem?.titleView = titleLabel
         
         //        scanButton.setAttributedTitle(getAttributedText("Scan HandleQRTM", position: 2), forState: .Normal)
-        }
+                }
     
     func getAttributedText(str : String,position : NSInteger) -> NSMutableAttributedString {
-        let font:UIFont? = KAppRegularFont
-        let fontSuper:UIFont? = UIFont(name: "Raleway-Regular", size:(NSUserDefaults.standardUserDefaults().valueForKey("size") as! CGFloat) - 6)
+        let font:UIFont? = UIFont(name:"VarelaRound", size:13)
+        let fontSuper:UIFont? = UIFont(name: "VarelaRound", size:(NSUserDefaults.standardUserDefaults().valueForKey("size") as! CGFloat) - 10)
         let attString:NSMutableAttributedString = NSMutableAttributedString(string: str, attributes: [NSFontAttributeName:font!])
         attString.setAttributes([NSFontAttributeName:fontSuper!,NSBaselineOffsetAttributeName:6], range: NSRange(location:attString.length-position,length:2))
         return attString
@@ -55,30 +55,23 @@ class ACQRCodeVC: UIViewController,QRCodeReaderViewControllerDelegate {
     
     @IBAction func scanQRButtonAction(sender: UIButton) {
         
-        let qrCodeResultVC = self.storyboard?.instantiateViewControllerWithIdentifier("ACGABUserProfileVCID") as! ACGABUserProfileVC
-        qrCodeResultVC.isFromQRCode = true
-        qrCodeResultVC.strQRCode = "dcb53ac2965b9233"
-        self.navigationController?.pushViewController(qrCodeResultVC, animated: true)
-        
-        //            if QRCodeReader.supportsMetadataObjectTypes() {
-        //                reader.modalPresentationStyle = .FormSheet
-        //                reader.delegate               = self
-        //
-        //                reader.completionBlock = { (result: QRCodeReaderResult?) in
-        //                    if let result = result {
-        //                        print("Completion with result: \(result.value) of type \(result.metadataType)")
-        //                    }
-        //                }
-        //
-        //                presentViewController(reader, animated: true, completion: nil)
-        //            } else {
-        //                //            let qrCodeResultVC = self.storyboard?.instantiateViewControllerWithIdentifier("WFQRCodeScanResultVCID") as! WFQRCodeScanResultVC
-        //                //            self.navigationController?.pushViewController(qrCodeResultVC, animated: true)
-        //                let alert = UIAlertController(title: "Error", message: "Reader not supported by the current device", preferredStyle: .Alert)
-        //                alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
-        //
-        //                presentViewController(alert, animated: true, completion: nil)
-        //            }
+        if QRCodeReader.supportsMetadataObjectTypes() {
+            reader.modalPresentationStyle = .FormSheet
+            reader.delegate               = self
+            
+            reader.completionBlock = { (result: QRCodeReaderResult?) in
+                if let result = result {
+                    print("Completion with result: \(result.value) of type \(result.metadataType)")
+                }
+            }
+            
+            presentViewController(reader, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Error", message: "Reader not supported by the current device", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
+            
+            presentViewController(alert, animated: true, completion: nil)
+        }
     }
     
     // MARK: - QRCodeReader Delegate Methods
@@ -88,6 +81,8 @@ class ACQRCodeVC: UIViewController,QRCodeReaderViewControllerDelegate {
             print("QRCode=>",result.value)
             let GABVC = self!.storyboard?.instantiateViewControllerWithIdentifier("ACGABUserProfileVCID") as! ACGABUserProfileVC
             GABVC.strQRCode = result.value //"dcb53ac2965b9233"
+            GABVC.isFromQRCode = true
+            
             self?.navigationController?.pushViewController(GABVC, animated: true)
         }
     }

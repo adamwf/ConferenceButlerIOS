@@ -96,8 +96,6 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
     
     //MARK:- Helper Method
     func customInit() {
-//        editArray = ["To have your Profile info appear in our Directory of registered Users.","To have your Profile info displayed within Search Engines results for Google,Bing,Yahoo.etc,check this box."]
-//        editMyAccountArray = [editScreendictTest!,editScreendictTest1!,editScreendictTest2!,editScreendictTest3!,editScreendictTest4!]
         self.navigationItem.rightBarButtonItems = ACAppUtilities.rightBarButtonArray(["nav_ic13"],controller: self) as? [UIBarButtonItem]
 
         self.navigationItem.title = "Edit My Account"
@@ -105,6 +103,7 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
         editMyAccountTableView.estimatedRowHeight = 50.0
         editMyAccountTableView.rowHeight = UITableViewAutomaticDimension
         profileImgView.sd_setImageWithURL(NSURL(string: userObj.userImage), placeholderImage: UIImage(named: "user"))
+        
         getRoundButton(profileImgViewButton)
         getRoundImage(profileImgView)
         
@@ -133,7 +132,12 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
     
     func rightBarButtonsAction(barbutton : UIButton) {
         self.view .endEditing(true)
-       callApiForUpdateUser()
+        if  self.isAllFieldVerified() == alertValidation.alert_None {
+            callApiForUpdateUser()
+        } else {
+            editMyAccountTableView.reloadData()
+        }
+       
     }
 
     // MARK: - Selector Methods
@@ -267,7 +271,7 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
 //                return cell
 //            } else {
                 let cell = tableView.dequeueReusableCellWithIdentifier("ACSignUpTVCellID", forIndexPath: indexPath) as! ACSignUpTVCell
-                
+            
                 cell.commonTextField.returnKeyType = UIReturnKeyType.Next
                 cell.commonTextField.delegate = self
                 cell.commonTextField.tag = 550 + indexPath.row
@@ -277,7 +281,7 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
                 switch indexPath.row {
                 case 0:
                     cell.commonTextField.placeholder = "First Name"
-                    cell.commonTextField.text = userObj.userFName
+                    cell.commonTextField.text = self.userObj.userFName
                     cell.commonTextField.autocapitalizationType = UITextAutocapitalizationType.Words
                     if alert == alertValidation.alert_Empty && rowValue == 0 {
                         cell.alertLabel.text = "*Please enter first name"
@@ -290,7 +294,7 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
                     break
                 case 1:
                     cell.commonTextField.placeholder = "Last Name"
-                    cell.commonTextField.text = userObj.userLName
+                    cell.commonTextField.text = self.userObj.userLName
                     cell.commonTextField.autocapitalizationType = UITextAutocapitalizationType.Words
                     if alert == alertValidation.alert_Empty && rowValue == 1 {
                         cell.alertLabel.text = "*Please enter last name"
@@ -303,7 +307,7 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
                     break
                 case 2:
                     cell.commonTextField.placeholder = "Phone Number(Optional)"
-                    cell.commonTextField.text = userObj.userPhone
+                    cell.commonTextField.text = self.userObj.userPhone
                     cell.commonTextField.keyboardType = UIKeyboardType.NumberPad
                     cell.commonTextField.inputAccessoryView = addToolBar("Next")
                     if alert == alertValidation.alert_PhoneNoInvalid && rowValue == 2 {
@@ -315,7 +319,7 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
                     break
                 case 3:
                     cell.commonTextField.placeholder = "Email(Optional)"
-                    cell.commonTextField.text = userObj.userEmail
+                    cell.commonTextField.text = self.userObj.userEmail
                     if alert == alertValidation.alert_Empty && rowValue == 3 {
                         cell.alertLabel.text = "*Please enter email"
                     } else if alert == alertValidation.alert_EmailInvalid && rowValue == 3 {
@@ -327,23 +331,22 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
                     break
                 case 4:
                     cell.commonTextField.placeholder = "Address(Optional)"
-                    cell.commonTextField.text = userObj.userAddress
+                    cell.commonTextField.text = self.userObj.userAddress
                     cell.alertLabel.text = ""
                     break
                 case 5:
                     cell.commonTextField.placeholder = "Hobbies(Optional)"
-                    cell.commonTextField.text = userObj.userHobbies
+                    cell.commonTextField.text = self.userObj.userHobbies
                     cell.alertLabel.text = ""
                     break
                 default:
                     cell.commonTextField.placeholder = "Other Info(Optional)"
-                    cell.commonTextField.text = userObj.otherInfo
+                    cell.commonTextField.text = self.userObj.otherInfo
                     cell.alertLabel.text = ""
                     cell.commonTextField.returnKeyType = UIReturnKeyType.Done
                     break
                 }
                 cell.commonTextField.attributedPlaceholder = NSAttributedString(string: cell.commonTextField.placeholder!, attributes: [NSForegroundColorAttributeName : UIColor.grayColor() ,NSFontAttributeName : KAppRegularFont])
-                
                 return cell
             
         } else {

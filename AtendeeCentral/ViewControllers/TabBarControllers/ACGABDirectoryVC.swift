@@ -8,11 +8,13 @@
 
 import UIKit
 
-class ACGABDirectoryVC: UIViewController {
+class ACGABDirectoryVC: UIViewController,customGroupDelegate {
     
     var  gabUserArray = NSMutableArray()
     var pageNo : NSInteger = 1
     var selectedArray = NSMutableArray()
+    var grpImg = UIImage()
+    var grpName = String()
     
     @IBOutlet var selectAllButton: UIButton!
     @IBOutlet var gabDirectoryTableView: UITableView!
@@ -42,6 +44,22 @@ class ACGABDirectoryVC: UIViewController {
         self.navigationItem.rightBarButtonItems = ACAppUtilities.rightBarButtonArray(["nav_ic13",],controller: self) as? [UIBarButtonItem]
     }
     
+    //MARK:- Custom Delegate Methods
+    func sendDataBack(selectedArray : NSMutableArray,groupImage: UIImage, groupName: String) {
+        grpImg = groupImage
+        grpName = groupName
+        delay(0.5) {
+            for case let item as ACFriendsInfo in selectedArray {
+                for case let userObj as ACFriendsInfo in self.gabUserArray {
+                    if item.userID == userObj.userID {
+                        userObj.isSelectedUserFriend = true
+                    }
+                }
+            }
+            self.gabDirectoryTableView.reloadData()
+        }
+    }
+
     // MARK: - Selector Methods
     @objc func leftBarButtonAction(button : UIButton) {
         self.view .endEditing(true)
@@ -54,7 +72,10 @@ class ACGABDirectoryVC: UIViewController {
             if item.isSelectedUserFriend {
                 let groupVC = self.storyboard?.instantiateViewControllerWithIdentifier("ACGroupVCID") as! ACGroupVC
                 groupVC.groupUsersArray = selectedArray
-                               self.navigationController?.pushViewController(groupVC, animated: true)
+                groupVC.delegate = self
+                groupVC.groupName = grpName
+                groupVC.groupImage = grpImg
+                self.navigationController?.pushViewController(groupVC, animated: true)
                 return
             }
         }

@@ -86,6 +86,7 @@
 		429585851D54CD3D00CF74AE /* ACManagedInfoDirectoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429585841D54CD3D00CF74AE /* ACManagedInfoDirectoryVC.swift */; };
 		429585871D54CD7300CF74AE /* ACManageInfoUserDetailsTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429585861D54CD7300CF74AE /* ACManageInfoUserDetailsTVCell.swift */; };
 		429585891D54CF7600CF74AE /* ACAddSocialHandlerTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429585881D54CF7600CF74AE /* ACAddSocialHandlerTVCell.swift */; };
+		429A0A761DBB5EB30007320C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429A0A751DBB5EB30007320C /* StoreKit.framework */; };
 		429B5A041D6A507B00A01A45 /* ACCustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429B5A031D6A507B00A01A45 /* ACCustomTextView.swift */; };
 		42A453B71D508110006FEB93 /* ACCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A453B61D508110006FEB93 /* ACCustomButton.swift */; };
 		42A453BA1D508160006FEB93 /* ACLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A453B91D508160006FEB93 /* ACLoginVC.swift */; };
@@ -156,7 +157,6 @@
 		5D1F48BC1DA67CB7004371D9 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1F48AD1DA67CB7004371D9 /* ImageIO.framework */; };
 		5D1F48BD1DA67CB7004371D9 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1F48AE1DA67CB7004371D9 /* MediaPlayer.framework */; };
 		5D1F48BE1DA67CB7004371D9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1F48AF1DA67CB7004371D9 /* Security.framework */; };
-		5D1F48BF1DA67CB7004371D9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1F48B01DA67CB7004371D9 /* StoreKit.framework */; };
 		5D1F48C01DA67CB7004371D9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1F48B11DA67CB7004371D9 /* SystemConfiguration.framework */; };
 		5D1F48C11DA67CB7004371D9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1F48B21DA67CB7004371D9 /* UIKit.framework */; };
 		5D5929621DA7608000C95191 /* ACEventTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5929611DA7608000C95191 /* ACEventTVCell.swift */; };
@@ -338,6 +338,7 @@
 		429585841D54CD3D00CF74AE /* ACManagedInfoDirectoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACManagedInfoDirectoryVC.swift; sourceTree = "<group>"; };
 		429585861D54CD7300CF74AE /* ACManageInfoUserDetailsTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACManageInfoUserDetailsTVCell.swift; sourceTree = "<group>"; };
 		429585881D54CF7600CF74AE /* ACAddSocialHandlerTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACAddSocialHandlerTVCell.swift; sourceTree = "<group>"; };
+		429A0A751DBB5EB30007320C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		429B5A031D6A507B00A01A45 /* ACCustomTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACCustomTextView.swift; sourceTree = "<group>"; };
 		42A453B61D508110006FEB93 /* ACCustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACCustomButton.swift; sourceTree = "<group>"; };
 		42A453B91D508160006FEB93 /* ACLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACLoginVC.swift; sourceTree = "<group>"; };
@@ -418,7 +419,6 @@
 		5D1F48AD1DA67CB7004371D9 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		5D1F48AE1DA67CB7004371D9 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		5D1F48AF1DA67CB7004371D9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		5D1F48B01DA67CB7004371D9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		5D1F48B11DA67CB7004371D9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5D1F48B21DA67CB7004371D9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5D5929611DA7608000C95191 /* ACEventTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACEventTVCell.swift; sourceTree = "<group>"; };
@@ -509,6 +509,7 @@
 				5DE10A571DB628F6003FA81E /* SafariServices.framework in Frameworks */,
 				5DE10A551DB62828003FA81E /* libz.tbd in Frameworks */,
 				5D1F48B31DA67CB7004371D9 /* Accelerate.framework in Frameworks */,
+				429A0A761DBB5EB30007320C /* StoreKit.framework in Frameworks */,
 				5D1F48B41DA67CB7004371D9 /* AddressBook.framework in Frameworks */,
 				5D1F48B51DA67CB7004371D9 /* AssetsLibrary.framework in Frameworks */,
 				5D1F48B61DA67CB7004371D9 /* CoreData.framework in Frameworks */,
@@ -522,7 +523,6 @@
 				5D1F48BC1DA67CB7004371D9 /* ImageIO.framework in Frameworks */,
 				5D1F48BD1DA67CB7004371D9 /* MediaPlayer.framework in Frameworks */,
 				5D1F48BE1DA67CB7004371D9 /* Security.framework in Frameworks */,
-				5D1F48BF1DA67CB7004371D9 /* StoreKit.framework in Frameworks */,
 				5D1F48C01DA67CB7004371D9 /* SystemConfiguration.framework in Frameworks */,
 				5D1F48C11DA67CB7004371D9 /* UIKit.framework in Frameworks */,
 				5DCC322A1DA3B84E00D0B656 /* AlamofireOauth2.framework in Frameworks */,
@@ -561,6 +561,7 @@
 		359D43FFCC07F7E67332F9C0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				429A0A751DBB5EB30007320C /* StoreKit.framework */,
 				5DE10A561DB628F6003FA81E /* SafariServices.framework */,
 				5DE10A541DB62828003FA81E /* libz.tbd */,
 				5D1F48A41DA67CB7004371D9 /* Accelerate.framework */,
@@ -575,7 +576,6 @@
 				5D1F48AD1DA67CB7004371D9 /* ImageIO.framework */,
 				5D1F48AE1DA67CB7004371D9 /* MediaPlayer.framework */,
 				5D1F48AF1DA67CB7004371D9 /* Security.framework */,
-				5D1F48B01DA67CB7004371D9 /* StoreKit.framework */,
 				5D1F48B11DA67CB7004371D9 /* SystemConfiguration.framework */,
 				5D1F48B21DA67CB7004371D9 /* UIKit.framework */,
 				5DCC32281DA3B84E00D0B656 /* AlamofireOauth2.framework */,
@@ -1157,6 +1157,12 @@
 				TargetAttributes = {
 					42B669641D50768900B055E9 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 6GAZEN8S6U;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 					42B669781D50768900B055E9 = {
 						CreatedOnToolsVersion = 7.3;
@@ -1520,8 +1526,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mobiloitte Technologies India Private Limited";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mobiloitte Technologies India Private Limited";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1543,8 +1549,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitte;
-				PROVISIONING_PROFILE = "659f041d-1d99-4ab3-93c8-81422daa892e";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitteTesting04jan16Development;
+				PROVISIONING_PROFILE = "e962a2cf-df94-4a47-97d4-4b1942019a13";
 				SDKROOT = iphoneos;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "AtendeeCentral/AtendeeCentral-Bridging-Header.h";
@@ -1570,8 +1576,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mobiloitte Technologies India Private Limited";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mobiloitte Technologies India Private Limited";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1586,8 +1592,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitte;
-				PROVISIONING_PROFILE = "659f041d-1d99-4ab3-93c8-81422daa892e";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitteTesting04jan16Development;
+				PROVISIONING_PROFILE = "e962a2cf-df94-4a47-97d4-4b1942019a13";
 				SDKROOT = iphoneos;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "AtendeeCentral/AtendeeCentral-Bridging-Header.h";
@@ -1602,8 +1608,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mobiloitte Technologies India Private Limited";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mobiloitte Technologies India Private Limited";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1625,9 +1631,9 @@
 					"\"QRCodeReader\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitte;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitteTesting04jan16Development;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "659f041d-1d99-4ab3-93c8-81422daa892e";
+				PROVISIONING_PROFILE = "e962a2cf-df94-4a47-97d4-4b1942019a13";
 				SWIFT_INCLUDE_PATHS = "";
 			};
 			name = Debug;
@@ -1639,8 +1645,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mobiloitte Technologies India Private Limited";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mobiloitte Technologies India Private Limited";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1662,9 +1668,9 @@
 					"\"QRCodeReader\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitte;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitteTesting04jan16Development;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "659f041d-1d99-4ab3-93c8-81422daa892e";
+				PROVISIONING_PROFILE = "e962a2cf-df94-4a47-97d4-4b1942019a13";
 				SWIFT_INCLUDE_PATHS = "";
 			};
 			name = Release;
@@ -1673,10 +1679,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
 				INFOPLIST_FILE = AtendeeCentralTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitte;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitteTesting04jan16Development;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e962a2cf-df94-4a47-97d4-4b1942019a13";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AtendeeCentral.app/AtendeeCentral";
 			};
 			name = Debug;
@@ -1685,10 +1694,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
 				INFOPLIST_FILE = AtendeeCentralTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitte;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitteTesting04jan16Development;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e962a2cf-df94-4a47-97d4-4b1942019a13";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AtendeeCentral.app/AtendeeCentral";
 			};
 			name = Release;
@@ -1696,11 +1708,14 @@
 		42B669941D50768900B055E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = AtendeeCentralUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitte;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitteTesting04jan16Development;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b6945d94-0aab-4841-a03a-9b913dcc0094";
 				TEST_TARGET_NAME = AtendeeCentral;
 			};
 			name = Debug;
@@ -1708,11 +1723,14 @@
 		42B669951D50768900B055E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = AtendeeCentralUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitte;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitteTesting04jan16Development;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b6945d94-0aab-4841-a03a-9b913dcc0094";
 				TEST_TARGET_NAME = AtendeeCentral;
 			};
 			name = Release;

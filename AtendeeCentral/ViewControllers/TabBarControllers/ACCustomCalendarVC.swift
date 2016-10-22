@@ -75,7 +75,7 @@ class ACCustomCalendarVC: UIViewController {
     
     func getFormattedDate(strDate : String) -> NSDateComponents {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.000Z"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         let date = dateFormatter.dateFromString(strDate)
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components([.Day,.Month,.Year], fromDate: date!)
@@ -102,8 +102,7 @@ class ACCustomCalendarVC: UIViewController {
     func callApiForEventsList(pageNo:NSInteger) {
         if kAppDelegate.hasConnectivity() {
             let params: [String : AnyObject] = [
-                "page" : pageNo
-            ]
+                :            ]
             ServiceHelper.sharedInstance.createGetRequest(params, apiName: "event_apis/event_list", completion: { (response, error) in
                 if error != nil {
                     AlertController.alert((error?.localizedDescription)!)

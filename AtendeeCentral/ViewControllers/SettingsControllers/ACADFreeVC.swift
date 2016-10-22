@@ -7,11 +7,21 @@
 //
 
 import UIKit
+import StoreKit
 
-class ACADFreeVC: UIViewController {
+enum ServiceError: ErrorType {
+    case Empty
+    case Overload
+}
+
+class ACADFreeVC: UIViewController,SKProductsRequestDelegate,SKPaymentTransactionObserver {
 
     var statusOne = Bool()
     var statusTwo = Bool()
+    var productIDs: Array<String!> = []
+    var productsArray: Array<SKProduct!> = []
+    var transactionInProgress = false
+    
     @IBOutlet weak var adFreeTblView: UITableView!
 
     //MARK:- View Life Cycle
@@ -31,6 +41,10 @@ class ACADFreeVC: UIViewController {
         self.navigationItem.title = "Purchase Ad Free Version"
         self.navigationItem.leftBarButtonItem = ACAppUtilities.leftBarButton("backArrow",controller: self)
         statusOne = true
+        self.productIDs.append("com.monthlyPaid")
+        self.productIDs.append("com.yearlyPaid")
+        requestProductInfo()
+        SKPaymentQueue.defaultQueue().addTransactionObserver(self)
     }
     
         // MARK: - Selector Methods
@@ -100,21 +114,85 @@ class ACADFreeVC: UIViewController {
     
     // MARK: - UIButton Action Methods
     @IBAction func purchaseButtonAction(sender: UIButton) {
-        AlertController.alert("Work in Progress")
+        if statusOne == true {
+          purchaseProduct(0)
+        } else {
+           purchaseProduct(1)
+        }
+        
     }
+    
+    ////////////////// In App Purchase /////////////////
+    func requestProductInfo() {
+        if SKPaymentQueue.canMakePayments() {
+            let productId = NSSet(array: productIDs)
+            let productRequest = SKProductsRequest(productIdentifiers: productId as! Set<String>)
+            productRequest.delegate = self
+            productRequest.start()
+        } else {
+            print("Cannot perform In App Purchases.")
+        }
+    }
+    
+    func purchaseProduct(index : NSInteger) {
+        if transactionInProgress {
+            return
+        }
+        if self.productsArray.count > 0 {
+            let payment = SKPayment(product: self.productsArray[index] as SKProduct)
+            SKPaymentQueue.defaultQueue().addPayment(payment)
+            self.transactionInProgress = true
+        }
+    }
+    
+    //MARK:- StoreKit Delegate
+    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        for transaction in transactions {
+            switch transaction.transactionState {
+            case SKPaymentTransactionState.Purchased:
+                print("Transaction completed successfully.")
+                SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+                transactionInProgress = false
+                if transaction.payment.productIdentifier == "com.monthlyPaid" {
+                    callApiForPurchaseAdFree("monthly")
+                } else if transaction.payment.productIdentifier == "com.yearlyPaid"{
+                    callApiForPurchaseAdFree("yearly")
+                }
+                
+            case SKPaymentTransactionState.Failed:
+                print("Transaction Failed");
+                SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+                transactionInProgress = false
+                
+            default:
+                print(transaction.transactionState.rawValue)
+            }
+        }
+    }
+    
+    func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+        if response.products.count != 0 {
+            for product in response.products {
+                productsArray.append(product)
+            }
+        } else {
+            AlertController.alert("Not Available", message: "No products to purchase.")
+        }
+    }
+    
 
     //MARK:- Web API Methods
-    func callApiForPurchaseAdFree() {
+    func callApiForPurchaseAdFree(paymentType : String) {
         if kAppDelegate.hasConnectivity() {
             
             let dict = NSMutableDictionary()
             dict[ACUserId] = NSUserDefaults.standardUserDefaults().valueForKey("ACUserID")
-            //            dict[HDNewConfirmPassword] = confirmPswrdTextField.text!
+            dict[ACPaymentType] = paymentType
             let params: [String : AnyObject] = [
                 "user": dict ,
                 ]
             
-            ServiceHelper.sharedInstance.createPostRequest(params, apiName: "user_apis/change_password", completion: { (response, error) in
+            ServiceHelper.sharedInstance.createPostRequest(params, apiName: "user_apis/payment", completion: { (response, error) in
                 if error != nil {
                     AlertController.alert((error?.localizedDescription)!)
                 }

@@ -13,6 +13,7 @@ class ACViewersVC: UIViewController {
     var  viewersArray = NSMutableArray()
     var  recentArray = NSMutableArray()
     var pageNo : NSInteger = 1
+    var maxPageNo : NSInteger = 1
     
     @IBOutlet var viewersTableView: UITableView!
 
@@ -144,7 +145,7 @@ class ACViewersVC: UIViewController {
         let currentOffset = scrollView.contentOffset.y;
         let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
         
-        if (maximumOffset - currentOffset <= -40.0) {
+        if (maximumOffset - currentOffset <= -40.0 && pageNo < maxPageNo+1) {
             pageNo += 1
             callApiForViewersList(pageNo)
         }
@@ -184,6 +185,7 @@ class ACViewersVC: UIViewController {
                     let res = response as! NSMutableDictionary
                     if res.objectForKeyNotNull("responseCode", expected: 0) as! NSInteger == 200 {
                         self.viewersArray.addObjectsFromArray(ACUserInfo.getViewersList(res) as [AnyObject])
+//                        self.maxPageNo = res.objectForKeyNotNull("total_pages", expected: 0) as! NSInteger
                         self.viewersTableView.reloadData()
                     } else {
                         AlertController.alert(res.objectForKeyNotNull("responseMessage", expected: "") as! String)
