@@ -54,6 +54,7 @@ class ACAccountSettingsVC: UIViewController {
 
 //        settingCell.statusSwitch.hidden = indexPath.row == 0 ? false : true
         settingCell.statusSwitch.hidden = true
+        settingCell.rightArrowImgView.hidden = indexPath.row == 4 ? true : false
         settingCell.itemNameLabel.text = itemArray.objectAtIndex(indexPath.row) as? String
         
         return settingCell
@@ -115,6 +116,7 @@ class ACAccountSettingsVC: UIViewController {
                         NSUserDefaults.standardUserDefaults().setValue(nil, forKey: "ACToken")
                         NSUserDefaults.standardUserDefaults().synchronize()
                          NSUserDefaults.standardUserDefaults().setValue("2", forKey: "rowValue")
+                        NSUserDefaults.standardUserDefaults().setValue("free", forKey: "ACPaymentType")
                         kAppDelegate.navController!.popToRootViewControllerAnimated(true)
                     } else {
                         AlertController.alert(res.objectForKeyNotNull("responseMessage", expected: "") as! String)

@@ -44,8 +44,7 @@ class ACCustomTabBarVC: UIViewController {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver("tabViewChangeNotification")
-        NSNotificationCenter.defaultCenter().removeObserver("setHomeTab")
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     // MARK: - Helper Methods

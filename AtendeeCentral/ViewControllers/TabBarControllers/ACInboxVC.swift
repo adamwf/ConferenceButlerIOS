@@ -28,7 +28,7 @@ class ACInboxVC: UIViewController {
         messageListTextField.text = ""
         super.viewWillAppear(animated)
         self.messageListArray.removeAllObjects()
-        callApiForMessageList(pageNo)
+//        callApiForMessageList(pageNo)
     }
     
     //MARK:- Memory Management Methods
@@ -110,7 +110,7 @@ class ACInboxVC: UIViewController {
         
         if (maximumOffset - currentOffset <= -40.0) {
             pageNo += 1
-            callApiForMessageList(pageNo)
+//            callApiForMessageList(pageNo)
         }
     }
     

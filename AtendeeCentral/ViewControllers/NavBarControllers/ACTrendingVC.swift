@@ -54,7 +54,7 @@ class ACTrendingVC: UIViewController {
         let userProfileVC = self.storyboard?.instantiateViewControllerWithIdentifier("ACGABUserProfileVCID") as! ACGABUserProfileVC
         userProfileVC.isFromQRCode = false
         print(button.tag)
-        let trends = trendingArray.objectAtIndex(button.tag - 101) as! ACUserInfo
+        let trends = trendingArray.objectAtIndex(NSUserDefaults.standardUserDefaults().valueForKey("ACPaymentType") as! String == "free" ? button.tag - 101 : button.tag - 100) as! ACUserInfo
         userProfileVC.strUserID = trends.userID
         self.navigationController?.pushViewController(userProfileVC, animated: true)
     }

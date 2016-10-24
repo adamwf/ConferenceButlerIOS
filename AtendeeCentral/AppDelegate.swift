@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         print(NSUserDefaults.standardUserDefaults().valueForKey("size"))
+        NSUserDefaults.standardUserDefaults().setValue("811e90a2cb4c2de225120e1c6192fc12f5662876", forKey: "device_token")
         let settings : UIUserNotificationSettings =  UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
@@ -111,6 +112,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject])
     {
+        let userDict = userInfo["aps"] as! Dictionary <String, AnyObject>
+        AlertController.alert("", message: userDict["alert"] as! String)
 //        let userDict = userInfo["aps"] as! Dictionary <String, AnyObject>
 //        
 //        if userInfo["notification_type"] as! String == "Community Center" {

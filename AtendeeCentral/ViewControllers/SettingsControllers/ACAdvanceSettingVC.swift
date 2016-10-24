@@ -27,7 +27,12 @@ class ACAdvanceSettingVC: UIViewController {
         self.customInit()
 
     }
-
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        callApiForGetAdvanceSettings()
+    }
+    
     //MARK:- Memory Management Methods
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -41,7 +46,6 @@ class ACAdvanceSettingVC: UIViewController {
         advanceSettingTblView.tableFooterView = footrView
         advanceSettingTblView.estimatedRowHeight = 100
         advanceSettingTblView.rowHeight = UITableViewAutomaticDimension
-        callApiForGetAdvanceSettings()
     }
     
     func leftBarButton(imageName : NSString) -> UIBarButtonItem {

@@ -114,7 +114,7 @@ class ACRequestsVC: UIViewController {
     @objc func declineButtonAction(button : UIButton) {
         AlertController.alert("", message: "Are you sure you want to decline this user's request?", buttons: ["Yes","NO"], tapBlock: { (alertAction, position) -> Void in
             if position == 0 {
-                let requestObj = self.requestUserArray.objectAtIndex(button.tag - 100) as! ACUserInfo
+                let requestObj = self.requestUserArray.objectAtIndex(button.tag - 5000) as! ACUserInfo
                 self.callApiForDeclineRequest(requestObj.userID)
             }
         })

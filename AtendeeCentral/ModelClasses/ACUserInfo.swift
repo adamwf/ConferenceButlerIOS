@@ -33,7 +33,7 @@ class ACUserInfo: NSObject {
     var time : String = ""
     var isGABUser : Bool = false
     var isFriend : Bool =  false
-    
+    var isPending : Bool =  false
     var userCity : String = ""
     var userState : String = ""
     var userCountry : String = ""
@@ -157,8 +157,9 @@ class ACUserInfo: NSObject {
             trendingList.userID = String(format: "%d", tempDict.objectForKeyNotNullExpectedObj("id", expectedObj:0) as! NSInteger)
             trendingList.userName = tempDict.objectForKeyNotNullExpectedObj("user_name", expectedObj:"") as! String
             trendingList.userImage = (tempDict.objectForKeyNotNullExpectedObj("image", expectedObj:NSDictionary()) as! NSDictionary).objectForKeyNotNull("url", expected: "") as! String
-            
+            if trendingList.userID != NSUserDefaults.standardUserDefaults().valueForKey("ACUserID") as! String {
             dummyArray.addObject(trendingList)
+            }
         }
         return dummyArray
     }
@@ -172,6 +173,7 @@ class ACUserInfo: NSObject {
             
             let requestList = ACUserInfo()
             let tempDict = dict as! NSDictionary
+            requestList.userID = String(format: "%d", tempDict.objectForKeyNotNullExpectedObj("id", expectedObj:0) as! NSInteger)
             requestList.userName = tempDict.objectForKeyNotNullExpectedObj("user_name", expectedObj:"") as! String
             requestList.userImage =  tempDict.objectForKeyNotNullExpectedObj("image", expectedObj:"") as! String
 //            requestList.otherInfo = tempDict.objectForKeyNotNullExpectedObj("image", expectedObj:"") as! String
@@ -239,6 +241,7 @@ class ACUserInfo: NSObject {
         
         if selfInfo == false {
             userInfo.isFriend = tempDict.objectForKeyNotNull("is_friend", expected: 0) as! Bool
+            userInfo.isPending = tempDict.objectForKeyNotNull("is_pending", expected: 0) as! Bool
         }
         for case let item as NSDictionary in (tempDict.objectForKeyNotNullExpectedObj("social_login", expectedObj:NSArray()) as! NSArray) {
             let socialObj = ACUserInfo()
@@ -264,7 +267,9 @@ class ACUserInfo: NSObject {
         }
         
         for case let item as ACUserInfo in userInfo.socialUserNameArray {
-            userInfo.userInfoHandlers = userInfo.userInfoHandlers.stringByAppendingString(String(format: "%@, ",item.socialUserName))
+            if item.socialUserName != "" {
+                userInfo.userInfoHandlers = userInfo.userInfoHandlers.stringByAppendingString(String(format: "%@, ",item.socialUserName))
+            }
         }
         userInfo.qrImage = tempDict.objectForKeyNotNull("social_code", expected: "") as! String
         return userInfo
@@ -282,6 +287,7 @@ class ACUserInfo: NSObject {
             viewersList.userImage = tempDict.objectForKeyNotNullExpectedObj("image", expectedObj:"") as! String
             viewersList.date = tempDict.objectForKeyNotNullExpectedObj("updated_at", expectedObj:"") as! String
             viewersList.isFriend = tempDict.objectForKeyNotNull("is_friend", expected: 0) as! Bool
+            viewersList.isPending = tempDict.objectForKeyNotNull("is_pending", expected: 0) as! Bool
             dummyArray.addObject(viewersList)
         }
         return dummyArray

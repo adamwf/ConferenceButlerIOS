@@ -12,7 +12,8 @@ class ACFontChangeVC: UIViewController {
 
     var itemArray = NSMutableArray()
     @IBOutlet weak var fontChngTableView: UITableView!
-
+    var rowValue : NSInteger = 0
+    
     
     //MARK:- View Life Cycle
     override func viewDidLoad() {
@@ -30,6 +31,7 @@ class ACFontChangeVC: UIViewController {
         self.navigationItem.title = "Choose the best Font size"
         self.navigationItem.leftBarButtonItem = self.leftBarButton("backArrow")
         itemArray = ["This is an Example","This is an Example","This is an Example","This is an Example","This is an Example","This is an Example"]
+        rowValue = (NSUserDefaults.standardUserDefaults().objectForKey("rowValue")?.integerValue)!
     }
     
     func leftBarButton(imageName : NSString) -> UIBarButtonItem {
@@ -58,7 +60,7 @@ class ACFontChangeVC: UIViewController {
         let settingCell = tableView.dequeueReusableCellWithIdentifier("ACSettingsTVCellID", forIndexPath: indexPath) as! ACSettingsTVCell
         settingCell.itemNameLabel.text = itemArray.objectAtIndex(indexPath.row) as? String
         print(NSUserDefaults.standardUserDefaults().objectForKey("rowValue")?.integerValue)
-        if indexPath.row == NSUserDefaults.standardUserDefaults().objectForKey("rowValue")?.integerValue {
+        if indexPath.row == rowValue {
             settingCell.selectButton.selected = true
         } else {
             settingCell.selectButton.selected = false
@@ -98,26 +100,30 @@ class ACFontChangeVC: UIViewController {
         switch indexPath.row {
         case 0:
             NSUserDefaults.standardUserDefaults().setValue(20, forKey: "size")
+            rowValue = 0
             break
         case 1:
             NSUserDefaults.standardUserDefaults().setValue(18, forKey: "size")
+            rowValue = 1
             break
         case 2:
             NSUserDefaults.standardUserDefaults().setValue(16, forKey: "size")
+            rowValue = 2
             break
         case 3:
             NSUserDefaults.standardUserDefaults().setValue(14, forKey: "size")
+            rowValue = 3
             break
         case 4:
             NSUserDefaults.standardUserDefaults().setValue(12, forKey: "size")
+            rowValue = 4
             break
         default:
             NSUserDefaults.standardUserDefaults().setValue(10, forKey: "size")
+            rowValue = 5
             break
         }
-        NSUserDefaults.standardUserDefaults().setObject(String(format: "%d", indexPath.row), forKey: "rowValue")
-        print(NSUserDefaults.standardUserDefaults().objectForKey("rowValue")?.integerValue)
-        NSUserDefaults.standardUserDefaults().synchronize()
+        
         fontChngTableView.reloadData()
     }
     
@@ -125,6 +131,9 @@ class ACFontChangeVC: UIViewController {
     @IBAction func applyButtonAction(sender: UIButton) {
         AlertController.alert("", message: "Font has been updated successfully.", buttons: ["OK"], tapBlock: { (alertAction, position) -> Void in
             if position == 0 {
+                NSUserDefaults.standardUserDefaults().setObject(String(format: "%d", self.rowValue), forKey: "rowValue")
+                print(NSUserDefaults.standardUserDefaults().objectForKey("rowValue")?.integerValue)
+                NSUserDefaults.standardUserDefaults().synchronize()
                 NSNotificationCenter.defaultCenter().postNotificationName("size", object: nil, userInfo:["size": (NSUserDefaults.standardUserDefaults().valueForKey("size")?.stringValue)!])
 //                self.navigationController?.popViewControllerAnimated(true)
                 

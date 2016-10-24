@@ -31,7 +31,7 @@ class ACCustomLabel: UILabel {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver("size")
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
 }

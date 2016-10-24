@@ -81,6 +81,8 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
     var popover:UIPopoverController?=nil
     var socialLoginStatus : Bool = false
      var imageData = NSData()
+    var socialObj = ACUserInfo()
+    
     @IBOutlet var editMyAccountTableView: UITableView!
 
     //MARK:- View Life Cycle
@@ -103,7 +105,21 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
         editMyAccountTableView.estimatedRowHeight = 50.0
         editMyAccountTableView.rowHeight = UITableViewAutomaticDimension
         profileImgView.sd_setImageWithURL(NSURL(string: userObj.userImage), placeholderImage: UIImage(named: "user"))
-        
+        for case let item as ACUserInfo in userObj.socialUserNameArray {
+            if(item.socialProvider == "linkedin" && item.socialUserName != "") {
+                socialObj.islinkedIn = item.islinkedIn
+            } else if (item.socialProvider == "google" && item.socialUserName != "") {
+                socialObj.isGoogle =  item.isGoogle
+            } else if (item.socialProvider == "facebook" && item.socialUserName != "") {
+                socialObj.isFacebook =  item.isFacebook
+            } else if (item.socialProvider == "instagram" && item.socialUserName != "") {
+                socialObj.isInstagram =  item.isInstagram
+            } else if (item.socialProvider == "twitter" && item.socialUserName != ""){
+                socialObj.isTwitter =  item.isTwitter
+               
+            }
+        }
+       
         getRoundButton(profileImgViewButton)
         getRoundImage(profileImgView)
         
@@ -352,36 +368,32 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier("ACAddSocialHandlerTVCellID", forIndexPath: indexPath) as! ACAddSocialHandlerTVCell
             
-//            let dict1 = editMyAccountArray [indexPath.row]
-//            cell.socialImageView.image = UIImage(named: dict1["profileLogo"]! as! String)
-//            cell.socialName.text = dict1["profileType"] as AnyObject? as? String
-            
             cell.socialButton.tag = indexPath.row
             switch indexPath.row {
             case 0:
                 cell.socialImageView.image = UIImage(named:"icon1")
                 cell.socialName.text = "LinkedIn"
-                cell.socialButton.selected = userObj.islinkedIn
+                cell.socialButton.selected = self.socialObj.islinkedIn
                 break
             case 1:
                 cell.socialImageView.image = UIImage(named:"icon2")
                 cell.socialName.text = "Facebook"
-                cell.socialButton.selected = userObj.isFacebook
+                cell.socialButton.selected = self.socialObj.isFacebook
                 break
             case 2:
                 cell.socialImageView.image = UIImage(named:"s16")
                 cell.socialName.text = "Google+"
-                cell.socialButton.selected = userObj.isGoogle
+                cell.socialButton.selected = socialObj.isGoogle
                 break
             case 3:
                 cell.socialImageView.image = UIImage(named:"s11")
                 cell.socialName.text = "Instagram"
-                cell.socialButton.selected = userObj.isInstagram
+                cell.socialButton.selected = socialObj.isInstagram
                 break
             default:
                 cell.socialImageView.image = UIImage(named:"s8")
                 cell.socialName.text = "Twitter"
-                cell.socialButton.selected = userObj.isTwitter
+                cell.socialButton.selected = socialObj.isTwitter
                 break
             }
             return cell
@@ -715,27 +727,27 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
             
             switch addSocialLogin {
             case socialLogin.linkedIn:
-                dict[ACSocialLoginStatus] = !userObj.islinkedIn
+                dict[ACSocialLoginStatus] = !socialObj.islinkedIn
                 dict[ACUserName] = String(format: "%@ %@", info.objectForKeyNotNull("firstName", expected: "") as! String ,info.objectForKeyNotNull("lastName", expected: "") as! String)
                 dict[ACSocialUID] = info.objectForKeyNotNull("id", expected: "") as! String
                 break
             case socialLogin.facebook :
-                dict[ACSocialLoginStatus] = !userObj.isFacebook
+                dict[ACSocialLoginStatus] = !socialObj.isFacebook
                 dict[ACUserName] = info.objectForKeyNotNull("name", expected: "") as! String
                 dict[ACSocialUID] =  info.objectForKeyNotNull("id", expected: "") as! String
                 break
             case socialLogin.google :
-                dict[ACSocialLoginStatus] = !userObj.isGoogle
+                dict[ACSocialLoginStatus] = !socialObj.isGoogle
                 dict[ACUserName] = info.objectForKeyNotNull("userName", expected: "") as! String
                 dict[ACSocialUID] =  info.objectForKeyNotNull("userID", expected: "")  as! String
                 break
             case socialLogin.instagram :
-                dict[ACSocialLoginStatus] = !userObj.isInstagram
+                dict[ACSocialLoginStatus] = !socialObj.isInstagram
                 dict[ACUserName] =  (info.objectForKeyNotNull("data", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("full_name", expected: "") as! String
                 dict[ACSocialUID] = (info.objectForKeyNotNull("data", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("id", expected: "") as! String
                 break
             default:
-                dict[ACSocialLoginStatus] = !userObj.isTwitter
+                dict[ACSocialLoginStatus] = !socialObj.isTwitter
                 dict[ACUserName] = info.objectForKeyNotNull("name", expected: "") as! String
                 dict[ACSocialUID] =  info.objectForKeyNotNull("id_str", expected: "") as! String
                 break
@@ -755,20 +767,20 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
                     if res.objectForKeyNotNull("responseCode", expected: 0) as! NSInteger == 200 {
                         switch self.addSocialLogin {
                         case socialLogin.linkedIn:
-                            self.userObj.islinkedIn = (res.objectForKeyNotNull("social_login", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("login_status", expected: 0) as! Bool
+                            self.socialObj.islinkedIn = (res.objectForKeyNotNull("social_login", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("login_status", expected: 0) as! Bool
 
                             break
                         case socialLogin.facebook :
-                            self.userObj.isFacebook = (res.objectForKeyNotNull("social_login", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("login_status", expected: 0) as! Bool
+                            self.socialObj.isFacebook = (res.objectForKeyNotNull("social_login", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("login_status", expected: 0) as! Bool
                             break
                         case socialLogin.google :
-                            self.userObj.isGoogle = (res.objectForKeyNotNull("social_login", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("login_status", expected: 0) as! Bool
+                            self.socialObj.isGoogle = (res.objectForKeyNotNull("social_login", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("login_status", expected: 0) as! Bool
                             break
                         case socialLogin.instagram :
-                            self.userObj.isInstagram = (res.objectForKeyNotNull("social_login", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("login_status", expected: 0) as! Bool
+                            self.socialObj.isInstagram = (res.objectForKeyNotNull("social_login", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("login_status", expected: 0) as! Bool
                             break
                         default:
-                            self.userObj.isTwitter = (res.objectForKeyNotNull("social_login", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("login_status", expected: 0) as! Bool
+                            self.socialObj.isTwitter = (res.objectForKeyNotNull("social_login", expected: NSDictionary()) as! NSDictionary).objectForKeyNotNull("login_status", expected: 0) as! Bool
 
                             break
                         }

@@ -169,6 +169,10 @@ class ACChatVC: UIViewController,UIImagePickerControllerDelegate,UINavigationCon
         
         chatArray = ACChatInfo.getChatInfo(response)
         chatTableView.reloadData()
+        if chatArray.count > 1 {
+            let indexPath = NSIndexPath(forRow: chatArray.count-1, inSection: 0)
+            chatTableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+        }
     }
 
     func getChatDummyData(chatText : String, isAudio : Bool, isImage : Bool ,isVideo : Bool, image : String, video : String,audio : String ) {
@@ -390,6 +394,10 @@ class ACChatVC: UIViewController,UIImagePickerControllerDelegate,UINavigationCon
                 AlertController.alert("Please enter text.")
             }
             self.messageTextView.text = ""
+        }
+        if chatArray.count > 1 {
+            let indexPath = NSIndexPath(forRow: chatArray.count-1, inSection: 0)
+            chatTableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
         }
         
     }

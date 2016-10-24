@@ -241,9 +241,15 @@ class ACLoginVC: ACBaseVC,UIGestureRecognizerDelegate {
                         NSUserDefaults.standardUserDefaults().setValue((res.objectForKeyNotNull("user", expected: NSDictionary()).objectForKeyNotNull("id", expected: "") as? String ?? ""), forKey: "ACUserID")
                         print(NSUserDefaults.standardUserDefaults().valueForKey("ACUserID"))
                         NSUserDefaults.standardUserDefaults().setValue((res.objectForKeyNotNull("user", expected: NSDictionary()).objectForKeyNotNull("access_token", expected: "") as? String ?? ""), forKey: "ACToken")
-                         NSUserDefaults.standardUserDefaults().setValue((res.objectForKeyNotNull("user", expected: NSDictionary()).objectForKeyNotNull("Payment_type", expected: "") as? String ?? ""), forKey: "ACPaymentType")
+                        
+                        
                         print(NSUserDefaults.standardUserDefaults().valueForKey("ACToken"))
                         NSUserDefaults.standardUserDefaults().setValue("2", forKey: "rowValue")
+                        
+                        NSUserDefaults.standardUserDefaults().setValue((res.objectForKeyNotNull("user", expected: NSDictionary()).objectForKeyNotNull("payment_type", expected: "") as? String ?? ""), forKey: "ACPaymentType")
+                        
+                        print("PaymentType===>",NSUserDefaults.standardUserDefaults().valueForKey("ACPaymentType"))
+                        
                         NSUserDefaults.standardUserDefaults().synchronize()
                         ACAppData.appInfoSharedInstance.appUserInfo = ACUserInfo.getUserLoginInfo(response!)
                         let tabBarVC = self.storyboard?.instantiateViewControllerWithIdentifier("ACCustomTabBarVCID")

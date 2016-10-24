@@ -127,7 +127,7 @@ class ACHomeVC: ACBaseVC  {
         print(NSUserDefaults.standardUserDefaults().valueForKey("ACPaymentType"))
         if feedObj.feedAdImg != nil && NSUserDefaults.standardUserDefaults().valueForKey("ACPaymentType") as! String == "free" {
             let cell = tableView.dequeueReusableCellWithIdentifier("ACAdTVCellID", forIndexPath: indexPath) as! ACAdTVCell
-            cell.adImgView.sd_setImageWithURL(feedObj.feedAdImg, placeholderImage: UIImage(named: ""))
+            cell.adImgView.sd_setImageWithURL(feedObj.feedAdImg, placeholderImage: UIImage(named: "plc_evntLarge"))
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier("ACHomeTVCellID", forIndexPath: indexPath) as! ACHomeTVCell

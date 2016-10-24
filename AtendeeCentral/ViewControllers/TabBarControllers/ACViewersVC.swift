@@ -121,10 +121,20 @@ class ACViewersVC: UIViewController {
             let viewersObj = viewersArray.objectAtIndex(indexPath.row) as! ACUserInfo
             cell.viewersImgView.sd_setImageWithURL(NSURL(string:viewersObj.userImage), placeholderImage: UIImage(named: "user"))
             cell.viewersUserName.text = viewersObj.userName
-            cell.selectionButton.selected =  viewersObj.isFriend
+            if viewersObj.isPending {
+                cell.selectionButton.setTitle("Pending", forState: .Normal)
+                cell.selectionButton.userInteractionEnabled = false
+            } else {
+                cell.selectionButton.selected =  viewersObj.isFriend
+                cell.selectionButton.userInteractionEnabled = true
+                cell.messageButton.hidden = !viewersObj.isFriend
+            }
+            
             cell.dateLabel.text = getFormattedDate(viewersObj.date)
             cell.selectionButton.tag = indexPath.row + 100
+            cell.messageButton.tag = indexPath.row + 1000
             cell.selectionButton.addTarget(self, action: #selector(viewersSelectionButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            cell.messageButton.addTarget(self, action: #selector(messageSelectionButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             return cell
 
         } else {
@@ -137,6 +147,7 @@ class ACViewersVC: UIViewController {
             cell.selectionButton.selected =  viewersObj.isFriend
             cell.selectionButton.tag = indexPath.row + 1000
             cell.selectionButton.addTarget(self, action: #selector(recentSelectionButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            cell.messageButton.addTarget(self, action: #selector(messageSelectionButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             return cell
         }
     }
@@ -155,8 +166,16 @@ class ACViewersVC: UIViewController {
     @objc func viewersSelectionButtonAction(sender: UIButton) {
          let viewersObj = viewersArray.objectAtIndex(sender.tag - 100) as! ACUserInfo
         viewersObj.isFriend = !viewersObj.isFriend
+        if (viewersObj.isFriend) {
         callApiForFollowUser(viewersObj.userID)
-        viewersTableView.reloadData()
+        } else {
+             callApiForDeclineRequest(viewersObj.userID)
+        }
+    }
+    
+    func messageSelectionButtonAction(sender: UIButton) {
+        let chatVC = self.storyboard?.instantiateViewControllerWithIdentifier("ACChatVCID") as! ACChatVC
+        self.navigationController?.pushViewController(chatVC, animated: true)
     }
     
     @objc func recentSelectionButtonAction(sender: UIButton) {
@@ -170,7 +189,6 @@ class ACViewersVC: UIViewController {
     //MARK:- Web API Methods
     func callApiForViewersList(pageNo:NSInteger) {
         if kAppDelegate.hasConnectivity() {
-            
             let dict = NSMutableDictionary()
             dict[ACUserId] = NSUserDefaults.standardUserDefaults().valueForKey("ACUserID")
             let params: [String : AnyObject] = [
@@ -216,6 +234,39 @@ class ACViewersVC: UIViewController {
                         self.viewersArray.removeAllObjects()
                         self.pageNo = 1
                         self.callApiForViewersList(self.pageNo)
+                    } else {
+                        AlertController.alert(res.objectForKeyNotNull("responseMessage", expected: "") as! String)
+                    }
+                }
+            })
+        }
+    }
+
+    func callApiForDeclineRequest(friendID : String) {
+        if kAppDelegate.hasConnectivity() {
+            
+            let dict = NSMutableDictionary()
+            dict[ACUserId] = NSUserDefaults.standardUserDefaults().valueForKey("ACUserID")
+            dict[ACFriendId] = friendID
+            let params: [String : AnyObject] = [
+                "user": dict ,
+                ]
+            
+            ServiceHelper.sharedInstance.createPostRequest(params, apiName: "request_apis/reject_request", completion: { (response, error) in
+                if error != nil {
+                    AlertController.alert((error?.localizedDescription)!)
+                }
+                if response != nil {
+                    let res = response as! NSMutableDictionary
+                    if res.objectForKeyNotNull("responseCode", expected: 0) as! NSInteger == 200 {
+                        AlertController.alert("", message:res.objectForKeyNotNull("responseMessage", expected: "") as! String, buttons: ["OK"], tapBlock: { (alertAction, position) -> Void in
+                            if position == 0 {
+                                self.viewersArray.removeAllObjects()
+                                self.pageNo = 1
+                                self.callApiForViewersList(self.pageNo)
+                            }
+                        })
+                        
                     } else {
                         AlertController.alert(res.objectForKeyNotNull("responseMessage", expected: "") as! String)
                     }

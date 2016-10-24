@@ -65,6 +65,6 @@ class ACCustomTextField: UITextField {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver("size")
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }

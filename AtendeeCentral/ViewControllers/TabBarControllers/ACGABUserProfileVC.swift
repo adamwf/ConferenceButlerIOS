@@ -78,37 +78,32 @@ class ACGABUserProfileVC: UIViewController,UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let socialUserName = userInfo.socialUserNameArray.objectAtIndex(indexPath.row) as! String
+        let socialObj = userInfo.socialUserNameArray.objectAtIndex(indexPath.row) as! ACUserInfo
         let cell = tableView.dequeueReusableCellWithIdentifier("ACDirectoryHandlerTVCellID", forIndexPath: indexPath) as! ACDirectoryHandlerTVCell
         
-        switch indexPath.row {
-        case 0:
-            cell.socialMediaImgView.image = UIImage(named:"icon1")
-            cell.socialMediaName.text = "LinkedIn"
-             cell.gabScreenUserName.text = socialUserName
-            break
-        case 1:
+        if socialObj.socialProvider == "facebook" {
             cell.socialMediaImgView.image = UIImage(named:"icon2")
             cell.socialMediaName.text = "Facebook"
-            cell.gabScreenUserName.text = socialUserName
-            break
-        case 2:
+            cell.gabScreenUserName.text = socialObj.socialUserName
+        } else if socialObj.socialProvider == "linkedin" {
+            cell.socialMediaImgView.image = UIImage(named:"icon1")
+            cell.socialMediaName.text = "LinkedIn"
+            cell.gabScreenUserName.text = socialObj.socialUserName
+        } else if socialObj.socialProvider == "google" {
             cell.socialMediaImgView.image = UIImage(named:"s16")
             cell.socialMediaName.text = "Google+"
-            cell.gabScreenUserName.text = socialUserName
-            break
-        case 3:
+            cell.gabScreenUserName.text = socialObj.socialUserName
+        } else if socialObj.socialProvider == "instagram" {
             cell.socialMediaImgView.image = UIImage(named:"s11")
             cell.socialMediaName.text = "Instagram"
-            cell.gabScreenUserName.text = socialUserName
-            break
-        default:
+            cell.gabScreenUserName.text = socialObj.socialUserName
+        } else if socialObj.socialProvider == "twitter" {
             cell.socialMediaImgView.image = UIImage(named:"s8")
             cell.socialMediaName.text = "Twitter"
-            cell.gabScreenUserName.text = socialUserName
-            break
+            cell.gabScreenUserName.text = socialObj.socialUserName
         }
-                return cell
+        
+        return cell
     }
     
 //     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -298,7 +293,13 @@ class ACGABUserProfileVC: UIViewController,UITableViewDelegate, UITableViewDataS
                         self.phoneNoLabel.text = self.userInfo.userPhone
                         self.addressLabel.text = self.userInfo.userAddress
                         self.userImageView.sd_setImageWithURL(NSURL(string:self.userInfo.userImage), placeholderImage: UIImage(named: "user"))
-                        self.followButton.setTitle(self.userInfo.isFriend == true ? "Unfollow" : "Follow", forState: .Normal)
+                        if self.userInfo.isPending == true {
+                            self.followButton.setTitle("Pending", forState: .Normal)
+                            self.followButton.userInteractionEnabled = false
+                        } else {
+                            self.followButton.setTitle(self.userInfo.isFriend == true ? "Unfollow" : "Follow", forState: .Normal)
+                        }
+                        
                         self.gabScreenTableView.reloadData()
                     } else {
                         AlertController.alert(res.objectForKeyNotNull("responseMessage", expected: "") as! String)

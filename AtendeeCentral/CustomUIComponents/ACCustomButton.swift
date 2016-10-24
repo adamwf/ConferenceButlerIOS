@@ -35,7 +35,7 @@ class ACCustomButton: UIButton {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver("size")
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
 }

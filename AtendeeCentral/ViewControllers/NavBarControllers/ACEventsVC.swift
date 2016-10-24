@@ -41,7 +41,7 @@ class ACEventsVC: UIViewController {
     
     func getFormattedDate(strDate : String) -> String {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.000Z"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         let date = dateFormatter.dateFromString(strDate)
         dateFormatter.dateFormat = "dd MMM, yyyy"
         return dateFormatter.stringFromDate(date!)
