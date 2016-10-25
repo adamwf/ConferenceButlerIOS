@@ -25,12 +25,8 @@ class ACAdvanceSettingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.customInit()
-
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         callApiForGetAdvanceSettings()
+
     }
     
     //MARK:- Memory Management Methods

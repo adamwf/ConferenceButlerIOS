@@ -302,7 +302,11 @@ class ACGABUserProfileVC: UIViewController,UITableViewDelegate, UITableViewDataS
                         
                         self.gabScreenTableView.reloadData()
                     } else {
-                        AlertController.alert(res.objectForKeyNotNull("responseMessage", expected: "") as! String)
+                        AlertController.alert("", message:res.objectForKeyNotNull("responseMessage", expected: "") as! String, buttons: ["OK"], tapBlock: { (alertAction, position) -> Void in
+                            if position == 0 {
+                                self.navigationController?.popViewControllerAnimated(true)
+                            }
+                        })
                     }
                 }
             })

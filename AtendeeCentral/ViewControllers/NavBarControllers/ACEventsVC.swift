@@ -63,8 +63,15 @@ class ACEventsVC: UIViewController {
     
     @objc func declineButtonAction(button : UIButton) {
 //        AlertController.alert("Work in progress")
-        let event = eventArray.objectAtIndex(button.tag - 100) as! ACEventInfo
-        callApiForDeclineRequest(event.eventInvitationID)
+        AlertController.alert("", message: "Are you sure you want to decline this event's request?", buttons: ["Yes","NO"], tapBlock: { (alertAction, position) -> Void in
+            if position == 0 {
+                let event = self.eventArray.objectAtIndex(button.tag - 100) as! ACEventInfo
+                self.callApiForDeclineRequest(event.eventInvitationID)
+            }
+        })
+
+        
+        
     }
     
     //MARK:- Tableview Datasource Methods

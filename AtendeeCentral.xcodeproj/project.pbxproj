@@ -1526,8 +1526,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1549,8 +1549,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitteTesting04jan16Development;
-				PROVISIONING_PROFILE = "e962a2cf-df94-4a47-97d4-4b1942019a13";
+				PRODUCT_BUNDLE_IDENTIFIER = com.attendeecentraldistribution;
+				PROVISIONING_PROFILE = "b6945d94-0aab-4841-a03a-9b913dcc0094";
 				SDKROOT = iphoneos;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "AtendeeCentral/AtendeeCentral-Bridging-Header.h";
@@ -1576,8 +1576,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1592,8 +1592,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitteTesting04jan16Development;
-				PROVISIONING_PROFILE = "e962a2cf-df94-4a47-97d4-4b1942019a13";
+				PRODUCT_BUNDLE_IDENTIFIER = com.attendeecentraldistribution;
+				PROVISIONING_PROFILE = "b6945d94-0aab-4841-a03a-9b913dcc0094";
 				SDKROOT = iphoneos;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "AtendeeCentral/AtendeeCentral-Bridging-Header.h";
@@ -1608,8 +1608,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1631,9 +1631,9 @@
 					"\"QRCodeReader\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitteTesting04jan16Development;
+				PRODUCT_BUNDLE_IDENTIFIER = com.attendeecentraldistribution;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e962a2cf-df94-4a47-97d4-4b1942019a13";
+				PROVISIONING_PROFILE = "b6945d94-0aab-4841-a03a-9b913dcc0094";
 				SWIFT_INCLUDE_PATHS = "";
 			};
 			name = Debug;
@@ -1645,8 +1645,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1668,9 +1668,9 @@
 					"\"QRCodeReader\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitteTesting04jan16Development;
+				PRODUCT_BUNDLE_IDENTIFIER = com.attendeecentraldistribution;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e962a2cf-df94-4a47-97d4-4b1942019a13";
+				PROVISIONING_PROFILE = "b6945d94-0aab-4841-a03a-9b913dcc0094";
 				SWIFT_INCLUDE_PATHS = "";
 			};
 			name = Release;
@@ -1679,13 +1679,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
 				INFOPLIST_FILE = AtendeeCentralTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitteTesting04jan16Development;
+				PRODUCT_BUNDLE_IDENTIFIER = com.attendeecentraldistribution;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e962a2cf-df94-4a47-97d4-4b1942019a13";
+				PROVISIONING_PROFILE = "b6945d94-0aab-4841-a03a-9b913dcc0094";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AtendeeCentral.app/AtendeeCentral";
 			};
 			name = Debug;
@@ -1694,13 +1694,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jagdish Harsh (7DGMCW8676)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
 				INFOPLIST_FILE = AtendeeCentralTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitteTesting04jan16Development;
+				PRODUCT_BUNDLE_IDENTIFIER = com.attendeecentraldistribution;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e962a2cf-df94-4a47-97d4-4b1942019a13";
+				PROVISIONING_PROFILE = "b6945d94-0aab-4841-a03a-9b913dcc0094";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AtendeeCentral.app/AtendeeCentral";
 			};
 			name = Release;
@@ -1708,12 +1708,12 @@
 		42B669941D50768900B055E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mobiloitte Technologies India Private Limited";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mobiloitte Technologies India Private Limited";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = AtendeeCentralUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitteTesting04jan16Development;
+				PRODUCT_BUNDLE_IDENTIFIER = com.attendeecentraldistribution;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b6945d94-0aab-4841-a03a-9b913dcc0094";
 				TEST_TARGET_NAME = AtendeeCentral;
@@ -1723,12 +1723,12 @@
 		42B669951D50768900B055E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Interlacing Technologies LLC (6GAZEN8S6U)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mobiloitte Technologies India Private Limited";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mobiloitte Technologies India Private Limited";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = AtendeeCentralUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobiloitteTesting04jan16Development;
+				PRODUCT_BUNDLE_IDENTIFIER = com.attendeecentraldistribution;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b6945d94-0aab-4841-a03a-9b913dcc0094";
 				TEST_TARGET_NAME = AtendeeCentral;

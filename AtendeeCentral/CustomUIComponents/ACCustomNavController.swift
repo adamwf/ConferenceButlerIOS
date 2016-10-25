@@ -14,14 +14,15 @@ class ACCustomNavController: UINavigationController {
         super.viewDidLoad()
         self.customInit(CGFloat((NSUserDefaults.standardUserDefaults().valueForKey("size")?.doubleValue)!))
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.blackColor(), NSFontAttributeName : UIFont(name:"VarelaRound", size: 13)!]
+        UINavigationBar.appearance().tintColor = UIColor.blackColor()
         UIApplication.sharedApplication().statusBarStyle = .LightContent
-        NSNotificationCenter.defaultCenter().addObserverForName(
-            "size",
-            object: nil, queue: nil,
-            usingBlock:{
-                [weak self] note in
-                self?.methodOFReceivedNotication(note)
-            })
+//        NSNotificationCenter.defaultCenter().addObserverForName(
+//            "size",
+//            object: nil, queue: nil,
+//            usingBlock:{
+//                [weak self] note in
+//                self?.methodOFReceivedNotication(note)
+//            })
     }
     
     // MARK: Memory Management Methods

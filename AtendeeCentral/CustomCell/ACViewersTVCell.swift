@@ -19,6 +19,7 @@ class ACViewersTVCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        getRoundImage(viewersImgView)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

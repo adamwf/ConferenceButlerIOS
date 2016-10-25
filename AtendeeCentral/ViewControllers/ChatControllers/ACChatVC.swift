@@ -171,7 +171,7 @@ class ACChatVC: UIViewController,UIImagePickerControllerDelegate,UINavigationCon
         chatTableView.reloadData()
         if chatArray.count > 1 {
             let indexPath = NSIndexPath(forRow: chatArray.count-1, inSection: 0)
-            chatTableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+            chatTableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         }
     }
 
@@ -187,11 +187,6 @@ class ACChatVC: UIViewController,UIImagePickerControllerDelegate,UINavigationCon
         chatArray .addObject(modal)
         print(chatArray.count)
         chatTableView.reloadData()
-        
-        if chatArray.count > 1 {
-            let indexPath = NSIndexPath(forRow: chatArray.count-1, inSection: 0)
-            chatTableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
-        }
     }
     
     func updateAudioMeter(timer:NSTimer) {
@@ -226,7 +221,7 @@ class ACChatVC: UIViewController,UIImagePickerControllerDelegate,UINavigationCon
             }
             if chatArray.count > 1 {
                 let indexPath = NSIndexPath(forRow: chatArray.count-1, inSection: 0)
-                chatTableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+                chatTableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
             }
         }
     }
@@ -235,6 +230,11 @@ class ACChatVC: UIViewController,UIImagePickerControllerDelegate,UINavigationCon
         if ((notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue()) != nil {
             bottomConstraintChatView.constant = 0
         }
+        if chatArray.count > 1 {
+            let indexPath = NSIndexPath(forRow: chatArray.count-1, inSection: 0)
+            chatTableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+        }
+
     }
     
     func getAttributedParagraphString(text : String) -> NSMutableAttributedString {
@@ -382,7 +382,6 @@ class ACChatVC: UIViewController,UIImagePickerControllerDelegate,UINavigationCon
     }
     
     @IBAction func sendButtonAction(sender: UIButton) {
-        self.view.endEditing(true)
         UIView.animateWithDuration(1, delay: 1, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: .CurveEaseInOut, animations: {
             self.heightConstraintCollectionView.constant = 0
         }) { _ in

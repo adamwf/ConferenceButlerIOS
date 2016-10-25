@@ -2885,6 +2885,10 @@
                                                     <action selector="saveToGalleryButtonAction:" destination="r1n-vs-cUx" eventType="touchUpInside" id="XOr-JH-7ci"/>
                                                 </connections>
                                             </button>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Fc9-6E-e64">
+                                                <rect key="frame" x="282" y="281" width="37" height="37"/>
+                                                <color key="color" red="0.97254901959999995" green="0.85882352939999995" blue="0.074509803920000006" alpha="1" colorSpace="calibratedRGB"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -2895,8 +2899,10 @@
                                             <constraint firstItem="vy3-v3-rdF" firstAttribute="leading" secondItem="fZf-lD-AyD" secondAttribute="leading" constant="25" id="ZlX-0R-AXt"/>
                                             <constraint firstAttribute="trailing" secondItem="vy3-v3-rdF" secondAttribute="trailing" constant="25" id="a6z-1S-L0j"/>
                                             <constraint firstAttribute="bottom" secondItem="vy3-v3-rdF" secondAttribute="bottom" constant="36" id="fNK-oQ-GeK"/>
+                                            <constraint firstItem="Fc9-6E-e64" firstAttribute="centerY" secondItem="fZf-lD-AyD" secondAttribute="centerY" id="gBw-6G-d44"/>
                                             <constraint firstAttribute="trailing" secondItem="hKO-Ym-Q84" secondAttribute="trailing" constant="25" id="gIY-MM-mqu"/>
                                             <constraint firstItem="hKO-Ym-Q84" firstAttribute="top" secondItem="fZf-lD-AyD" secondAttribute="top" constant="24" id="gOh-6z-Vat"/>
+                                            <constraint firstItem="Fc9-6E-e64" firstAttribute="centerX" secondItem="fZf-lD-AyD" secondAttribute="centerX" id="l1K-SO-px9"/>
                                             <constraint firstItem="vy3-v3-rdF" firstAttribute="top" secondItem="TJN-2B-sMD" secondAttribute="bottom" constant="18" id="m2L-wC-9DW"/>
                                         </constraints>
                                     </view>
@@ -2920,6 +2926,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="Fc9-6E-e64" id="W1M-UD-6uP"/>
                         <outlet property="qrCodeImageView" destination="hKO-Ym-Q84" id="3WR-Xh-5wU"/>
                         <outlet property="saveToGalleryButton" destination="TJN-2B-sMD" id="usq-0U-1rG"/>
                     </connections>

@@ -10,9 +10,9 @@ import Foundation
 import Alamofire
 
 final class ServiceHelper {
-//    let baseURL = "http://conference-butler.herokuapp.com/webservices/"
+    let baseURL = "http://conference-butler.herokuapp.com/webservices/"
     
-    let baseURL = "http://172.16.6.55:3000/webservices/"
+//    let baseURL = "http://172.16.6.55:3000/webservices/"
     var manager = Manager.sharedInstance
     
     // Specifying the Headers we need

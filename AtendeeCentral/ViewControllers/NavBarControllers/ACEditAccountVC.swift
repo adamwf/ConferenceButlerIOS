@@ -170,8 +170,9 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
     func openCamera() {
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)) {
             picker?.delegate = self
+            picker?.editing = true
             picker!.sourceType = UIImagePickerControllerSourceType.Camera
-            picker?.navigationBar.tintColor = UIColor.whiteColor()
+            picker?.navigationBar.tintColor = UIColor.blackColor()
             self .presentViewController(picker!, animated: true, completion: nil)
         } else {
             openGallery()
@@ -183,7 +184,7 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
         picker?.delegate = self
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
             self.presentViewController(picker!, animated: true, completion: nil)
-            picker?.navigationBar.tintColor = UIColor.whiteColor()
+            picker?.navigationBar.tintColor = UIColor.blackColor()
         } else {
             popover=UIPopoverController(contentViewController: picker!)
             popover!.presentPopoverFromRect(profileImgViewButton.frame, inView: self.view, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
@@ -193,10 +194,8 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         picker .dismissViewControllerAnimated(true, completion: nil)
         self.imageData = NSData()
-        self.imageData = UIImagePNGRepresentation((info[UIImagePickerControllerOriginalImage] as? UIImage)!)!
+        self.imageData = UIImageJPEGRepresentation((info[UIImagePickerControllerOriginalImage] as? UIImage)!, 0.2)!
         profileImgView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
-        //        self.imageData = UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage] as? UIImage, 0.6)
-        //sets the selected image to image view
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
@@ -595,7 +594,7 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
         } else if (!userObj.userLName.containsAlphabetsOnly()) {
             alert = alertValidation.alert_LastNameInvalid
             rowValue = 1
-        } else if (userObj.userPhone.length > 0 && userObj.userPhone.length < 10 && !userObj.userPhone.containsNumberOnly()) {
+        } else if (userObj.userPhone.length > 0 && userObj.userPhone.length < 10) {
             alert = alertValidation.alert_PhoneNoInvalid
             rowValue = 2
         } else if (userObj.userEmail.length > 0 && !userObj.userEmail.isEmail()) {
