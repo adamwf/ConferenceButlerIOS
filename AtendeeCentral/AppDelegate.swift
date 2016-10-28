@@ -10,13 +10,19 @@
 import UIKit
 import TwitterKit
 import Fabric
+import CoreLocation
+import AddressBookUI
+import Contacts
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
+    
+    var currentAddress: String?
     var window: UIWindow?
     var navController: ACCustomNavController?
-
+    var locationManager: CLLocationManager!
+    var location = CLLocation()
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         print(NSUserDefaults.standardUserDefaults().valueForKey("size"))
         NSUserDefaults.standardUserDefaults().setValue("811e90a2cb4c2de225120e1c6192fc12f5662876", forKey: "device_token")
@@ -24,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
         self.setUpDefaults()
+        self.initLocationManager()
         Fabric.with([Twitter.self])
         // Override point for customization after application launch.
         return true
@@ -143,6 +150,90 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //        }
     }
+    
+    //MARK: Location Finder Methods
+    func locationUpdate(location: CLLocation?) -> Void {
+        if let location = location {
+            logInfo("location   >>>   \(location)")
+        }
+    }
+    
+    func initLocationManager() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = 50
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    //MARK: CLLocation Manager Delegate
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locationArray = locations as NSArray
+        location = locationArray.lastObject as! CLLocation
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            self.getAddressFromLocation {
+                (address:String?) in
+                logInfo("\(address)")
+                self.currentAddress = address
+            }
+        })
+
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError){
+        //print("locations error = \(error.localizedDescription)")
+    }
+    
+    func getAddressFromLocation(completion:(String?) -> Void) {
+        
+        CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
+            
+            if error != nil {
+                print("Reverse geocoder failed with error" + error!.localizedDescription)
+                return
+            }
+            
+            if placemarks!.count > 0 {
+                let pm = placemarks![0]
+                
+                if let addressDic = pm.addressDictionary {
+                    if let lines = addressDic["FormattedAddressLines"] as? [String] {
+                        completion(lines.joinWithSeparator(", "))
+                    } else {
+                        // fallback
+                        if #available(iOS 9.0, *) {
+                            completion (CNPostalAddressFormatter.stringFromPostalAddress(self.postalAddressFromAddressDictionary(pm.addressDictionary!), style: .MailingAddress))
+                        } else {
+                            completion(ABCreateStringWithAddressDictionary(pm.addressDictionary!, false))
+                        }
+                    }
+                } else {
+                    completion ("\(self.location.coordinate.latitude), \(self.location.coordinate.longitude)")
+                }
+                
+            } else {
+                print("Problem with the data received from geocoder")
+                return
+            }
+        })
+    }
+    
+    @available(iOS 9.0, *)
+    func postalAddressFromAddressDictionary(addressdictionary: Dictionary<NSObject,AnyObject>) -> CNMutablePostalAddress {
+        
+        let address = CNMutablePostalAddress()
+        
+        address.street = addressdictionary["Street"] as? String ?? ""
+        address.state = addressdictionary["State"] as? String ?? ""
+        address.city = addressdictionary["City"] as? String ?? ""
+        address.country = addressdictionary["Country"] as? String ?? ""
+        address.postalCode = addressdictionary["ZIP"] as? String ?? ""
+        
+        return address
+    }
+    
+
 
 }
 

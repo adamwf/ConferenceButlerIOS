@@ -14,6 +14,9 @@ class ACSignUpTVCell: UITableViewCell {
     @IBOutlet weak var separatorLabel: UILabel!
     @IBOutlet weak var alertLabel: UILabel!
     
+    @IBOutlet weak var placePickerButton: UIButton!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

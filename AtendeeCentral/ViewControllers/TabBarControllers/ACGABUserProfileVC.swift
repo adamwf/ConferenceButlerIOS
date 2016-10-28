@@ -226,7 +226,11 @@ class ACGABUserProfileVC: UIViewController,UITableViewDelegate, UITableViewDataS
                     if res.objectForKeyNotNull("responseCode", expected: 0) as! NSInteger == 200 {
                         AlertController.alert("", message: res.objectForKeyNotNull("responseMessage", expected: "") as! String, buttons: ["OK"], tapBlock: { (alertAction, position) -> Void in
                             if position == 0 {
-                               
+                                if self.isFromQRCode == true {
+                                    self.callApiForProfile()
+                                } else {
+                                    self.callApiForViewProfile(self.strUserID)
+                                }
                             }
                         })
 
@@ -260,10 +264,19 @@ class ACGABUserProfileVC: UIViewController,UITableViewDelegate, UITableViewDataS
                         self.phoneNoLabel.text = self.userInfo.userPhone
                         self.addressLabel.text = self.userInfo.userAddress
                         self.userImageView.sd_setImageWithURL(NSURL(string: self.userInfo.userImage), placeholderImage: UIImage(named: "user"))
-                        self.followButton.setTitle(self.userInfo.isFriend == true ? "Unfollow" : "Follow", forState: .Normal)
+                        if self.userInfo.isPending == true {
+                            self.followButton.setTitle("Pending", forState: .Normal)
+                            self.followButton.userInteractionEnabled = false
+                        } else {
+                            self.followButton.setTitle(self.userInfo.isFriend == true ? "Unfollow" : "Follow", forState: .Normal)
+                        }
                         self.gabScreenTableView.reloadData()
                     } else {
-                        AlertController.alert(res.objectForKeyNotNull("responseMessage", expected: "") as! String)
+                        AlertController.alert("", message:res.objectForKeyNotNull("responseMessage", expected: "") as! String, buttons: ["OK"], tapBlock: { (alertAction, position) -> Void in
+                            if position == 0 {
+                                self.navigationController?.popViewControllerAnimated(true)
+                            }
+                        })
                     }
                 }
             })

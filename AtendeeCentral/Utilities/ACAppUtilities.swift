@@ -19,6 +19,7 @@ let KAppRegularFont = UIFont(name:"VarelaRound", size: NSUserDefaults.standardUs
 //let KAppSemiBoldFont = UIFont(name:"VarelaRound", size: NSUserDefaults.standardUserDefaults().valueForKey("size") as! CGFloat)!
 let  kClientId : String = "1007506303482-r5atf958h2ps72bj1t33a1oflo76k63j.apps.googleusercontent.com"
 
+
 let showLog = true
 
 let kAppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

@@ -123,6 +123,8 @@ class ACCustomCalendarVC: UIViewController {
                         self.calendarView.delegate = self
                         self.calendarView.calendarAppearanceDelegate = self
                     } else {
+                        self.calendarView.delegate = self
+                        self.calendarView.calendarAppearanceDelegate = self
                         AlertController.alert(res.objectForKeyNotNull("responseMessage", expected: "") as! String)
                     }
                 }

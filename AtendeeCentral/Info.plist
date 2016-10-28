@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.attendeecentraldistribution</string>
+	<string>com.mobiloitte</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -52,7 +52,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.attendeecentraldistribution</string>
+				<string>com.mobiloitte</string>
 			</array>
 		</dict>
 	</array>
@@ -81,6 +81,12 @@
 	</dict>
 	<key>FacebookAppID</key>
 	<string>1256751794358229</string>
+    <key>UberClientID</key>
+    <string>rSflRcJDzJn4MJc-A4ABQEs6vHaxN5rG</string>
+    <key>UberServerToken</key>
+    <string>FMIOvrMnU_vboZ9N50fUhiPDehBEbkeQ4hUwU0S2</string>
+    <key>UberDisplayName</key>
+    <string>Attendee Central</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
@@ -89,6 +95,8 @@
 		<string>fb-messenger-api</string>
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
+        <string>uber</string>
+        <string>uberauth</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -121,5 +129,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Attendee Central wants to access your location.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Attendee Central wants to access your location.</string>
 </dict>
 </plist>

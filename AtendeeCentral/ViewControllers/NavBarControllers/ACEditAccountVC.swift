@@ -10,6 +10,10 @@ import UIKit
 import TwitterKit
 import AlamofireOauth2
 import Alamofire
+import MapKit
+import AddressBookUI
+import Contacts
+import CoreLocation
 
 let instagramOauth2Settings = Oauth2Settings(
     baseURL: "https://api.instagram.com/v1/users/self",
@@ -67,8 +71,15 @@ enum socialLogin : Int {
     case twitter
 }
 
+
 class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,GIDSignInDelegate,GIDSignInUIDelegate {
    
+    var location: Location? {
+        didSet {
+            //            locationNameLabel.text = location.flatMap({ $0.title }) ?? "No location selected"
+        }
+    }
+
     @IBOutlet weak var profileImgView: UIImageView!
     @IBOutlet weak var profileImgViewButton: UIButton!
     var editArray = NSMutableArray()
@@ -216,6 +227,95 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
         }
     }
 
+    
+    //MARK:- Cell Button Action Methods
+    func locationPickerButtonAction(sender: UIButton) {
+        let locationPicker = LocationPickerViewController()
+        let coordinates = CLLocationCoordinate2D(latitude: kAppDelegate.location.coordinate.latitude, longitude: kAppDelegate.location.coordinate.longitude)
+        
+        // you can optionally set initial location
+        let initialLocation =  Location(name:kAppDelegate.currentAddress, location: kAppDelegate.location,
+                                        placemark: MKPlacemark(coordinate: coordinates, addressDictionary: [:]))
+        locationPicker.location = initialLocation
+        
+        // button placed on right bottom corner
+        locationPicker.showCurrentLocationButton = true // default: true
+        
+        // default: navigation bar's `barTintColor` or `.whiteColor()`
+        locationPicker.currentLocationButtonBackground = .orangeColor()
+        
+        // ignored if initial location is given, shows that location instead
+        locationPicker.showCurrentLocationInitially = true // default: true
+        
+        locationPicker.mapType = .Standard // default: .Hybrid
+        
+        // for searching, see `MKLocalSearchRequest`'s `region` property
+        locationPicker.useCurrentLocationAsHint = true // default: false
+        
+        locationPicker.searchBarPlaceholder = "Search places" // default: "Search or enter an address"
+        
+        locationPicker.searchHistoryLabel = "Previously searched" // default: "Search History"
+        
+        // optional region distance to be used for creation region when user selects place from search results
+        locationPicker.resultRegionDistance = 500 // default: 600
+        
+        locationPicker.completion = { location in
+            self.getAddressFromLocation((location?.location)!, completion: { (address:String?) in
+                self.userObj.userAddress = address!
+                self.editMyAccountTableView.reloadData()
+                
+            })
+        }
+        navigationController?.pushViewController(locationPicker, animated: true)
+    }
+    
+    func getAddressFromLocation(loc : CLLocation,completion:(String?) -> Void) {
+        
+        CLGeocoder().reverseGeocodeLocation(loc, completionHandler: {(placemarks, error) -> Void in
+            
+            if error != nil {
+                print("Reverse geocoder failed with error" + error!.localizedDescription)
+                return
+            }
+            
+            if placemarks!.count > 0 {
+                let pm = placemarks![0]
+                
+                if let addressDic = pm.addressDictionary {
+                    if let lines = addressDic["FormattedAddressLines"] as? [String] {
+                        completion(lines.joinWithSeparator(", "))
+                    } else {
+                        // fallback
+                        if #available(iOS 9.0, *) {
+                            completion (CNPostalAddressFormatter.stringFromPostalAddress(self.postalAddressFromAddressDictionary(pm.addressDictionary!), style: .MailingAddress))
+                        } else {
+                            completion(ABCreateStringWithAddressDictionary(pm.addressDictionary!, false))
+                        }
+                    }
+                } else {
+                    completion ("\(self.location!.coordinate.latitude), \(self.location!.coordinate.longitude)")
+                }
+                
+            } else {
+                print("Problem with the data received from geocoder")
+                return
+            }
+        })
+    }
+    
+    @available(iOS 9.0, *)
+    func postalAddressFromAddressDictionary(addressdictionary: Dictionary<NSObject,AnyObject>) -> CNMutablePostalAddress {
+        
+        let address = CNMutablePostalAddress()
+        
+        address.city = addressdictionary["City"] as? String ?? ""
+        address.country = addressdictionary["Country"] as? String ?? ""
+        userObj.userCity = address.city
+        userObj.userCountry = address.country
+        
+        return address
+    }
+
     //MARK:- UIButton Actions Methods
     @IBAction func createFreeSocialCodeButtonAction(sender: UIButton) {
         self.view.endEditing(true)
@@ -292,7 +392,8 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
                 cell.commonTextField.tag = 550 + indexPath.row
                 cell.commonTextField.autocapitalizationType = UITextAutocapitalizationType.None
                 cell.commonTextField.secureTextEntry = false
-                
+                cell.placePickerButton.hidden = true
+            
                 switch indexPath.row {
                 case 0:
                     cell.commonTextField.placeholder = "First Name"
@@ -346,8 +447,14 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
                     break
                 case 4:
                     cell.commonTextField.placeholder = "Address(Optional)"
+                    cell.commonTextField.userInteractionEnabled = false
+                     cell.placePickerButton.hidden = false
+                    cell.placePickerButton.addTarget(self, action: #selector(locationPickerButtonAction(_:)),
+                                                forControlEvents: .TouchUpInside)
                     cell.commonTextField.text = self.userObj.userAddress
                     cell.alertLabel.text = ""
+                   
+
                     break
                 case 5:
                     cell.commonTextField.placeholder = "Hobbies(Optional)"
@@ -622,14 +729,15 @@ class ACEditAccountVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
         case 553:
             userObj.userEmail = textField.text!
             break
-        case 554:
-            userObj.userAddress = textField.text!
-            break
+       
         case 555:
             userObj.userHobbies = textField.text!
             break
-        default:
+        case 556:
             userObj.otherInfo = textField.text!
+            break
+        default:
+            break
         }
     }
     
